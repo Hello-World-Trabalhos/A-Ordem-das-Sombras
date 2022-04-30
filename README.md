@@ -1,0 +1,3 @@
+# TC-Rogue-like
+
+Readme de apresentação do projeto ... em desenvolvimento ainda ...
