@@ -14,8 +14,13 @@ public class Destroyer : MonoBehaviour
         switch (other.tag)
         {
             case "RoomSpawnPoint":
-                Debug.Log("Destruindo objeto que colidiu no destroyer");
+                Debug.Log("Destruindo RoomSpawnPoint que colidiu no destroyer");
                 Destroy(other.gameObject);
+                break;
+
+            case "ClosedRoom":
+                // Destruir o closed room, evitando que ele fique dentro de um room sem querer
+                Debug.Log("Destruindo ClosedRoom que colidiu no destroyer");
                 break;
         }
     }
