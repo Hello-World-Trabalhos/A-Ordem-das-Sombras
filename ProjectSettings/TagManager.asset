@@ -10,6 +10,7 @@ TagManager:
   - RoomTemplates
   - Destroyer
   - Joystick
+  - Wall
   layers:
   - Default
   - TransparentFX
