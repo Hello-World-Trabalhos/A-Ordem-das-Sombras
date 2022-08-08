@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class RoomsStorage : MonoBehaviour
 {
-    // lembrar de deixar assim, porque talvez se durante a geração quiser colocar um obstáculo
-    // ou um item específico em um room aleatório, é possível também já com essas referências guardadas
-    private GameObject[] roomsSpawned;
-    private GameObject lastRoomSpawned;
+    public GameObject[] spawnedRooms;
+    public GameObject lastSpawnedRoom;
 
     void Start()
     {
@@ -18,17 +16,17 @@ public class RoomsStorage : MonoBehaviour
 
     private void FindLastSpawnedRoom()
     {
-        roomsSpawned = GameObject.FindGameObjectsWithTag("Room");
-        lastRoomSpawned = roomsSpawned[roomsSpawned.Length - 1];
+        spawnedRooms = GameObject.FindGameObjectsWithTag("Room");
+        lastSpawnedRoom = spawnedRooms[spawnedRooms.Length - 1];
     }
 
     public GameObject[] GetSpawnedRooms()
     {
-        return roomsSpawned;
+        return spawnedRooms;
     }
 
     public GameObject GetLastSpawnedRoom()
     {
-        return lastRoomSpawned;
+        return lastSpawnedRoom;
     }
 }
