@@ -13,7 +13,7 @@ public class RoomsStorage : MonoBehaviour
     {
         // Talvez aqui ir incrementando o timer, até que realmente possa ser contado, tipo, para cada
         // room que aparece no cenário, vai incrementando aqui
-        Invoke("FindLastSpawnedRoom", 5f);
+        Invoke("FindLastSpawnedRoom", ScenarioConstants.TIME_TO_GET_ALL_ROOMS_SPAWNED);
     }
 
     private void FindLastSpawnedRoom()
