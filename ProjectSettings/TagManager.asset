@@ -9,6 +9,9 @@ TagManager:
   - RoomSpawnPoint
   - RoomTemplates
   - Destroyer
+  - Joystick
+  - Wall
+  - Room
   layers:
   - Default
   - TransparentFX

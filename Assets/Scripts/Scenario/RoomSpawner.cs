@@ -24,8 +24,8 @@ public class RoomSpawner : MonoBehaviour
         {
             roomTemplates = GameObject.FindGameObjectWithTag("RoomTemplates").GetComponent<RoomTemplates>();
         }
-
-        Invoke("SpawnRoom", 0.3f);
+        
+        Invoke("SpawnRoom", ScenarioConstants.TIME_TO_GENERATE_NEW_ROOM);
 
     }
 
@@ -75,20 +75,13 @@ public class RoomSpawner : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO: Fazer um if aqui verficando se a tag é Destroyer, se for, o objeto aqui se auto
-        // destrói, Destroy(gameObjetct);
+
         if (other.CompareTag("RoomSpawnPoint"))
         {
             
             if (!other.GetComponent<RoomSpawner>().isSpawned && !isSpawned)
             {
-                // TODO: Continuar implementando e tentando melhorar o código
-                // Aparentemente não está OK, em alguns casos aparece esse quarto dentro dos outros
-                // e em quantias bem maiores, exemplo, dão spawn de 15 desses objetos, mas só 1 aparece
-                // uso de memória desnecessário
-                // Pensar na possibilidade de colocar o SpawnPointDestroyer em todos os quartos
-                // Assim sempre destrói o que aparecer ali
-                //Instantiate(roomTemplates.closedRoom, transform.position, Quaternion.identity);
+                Instantiate(roomTemplates.closedRoom, transform.position, Quaternion.identity);
             }
 
             Destroy(gameObject);
