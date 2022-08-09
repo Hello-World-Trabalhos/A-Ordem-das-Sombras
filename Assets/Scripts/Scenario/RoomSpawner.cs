@@ -6,9 +6,6 @@ using UnityEngine;
 public class RoomSpawner : MonoBehaviour
 {
 
-    private const float X_SPAWN_MARGIN_OF_ERROR = -4.5f;
-    private const float Y_SPAWN_MARGIN_OF_ERROR = 5.5f;
-
     public enum Direction
     {
         TOP, LEFT, BOTTOM, RIGHT
@@ -63,8 +60,8 @@ public class RoomSpawner : MonoBehaviour
                     break;
             }
 
-            float x = transform.position.x + X_SPAWN_MARGIN_OF_ERROR;
-            float y = transform.position.y + Y_SPAWN_MARGIN_OF_ERROR;
+            float x = transform.position.x + ScenarioConstants.X_SPAWN_MARGIN_OF_ERROR;
+            float y = transform.position.y + ScenarioConstants.Y_SPAWN_MARGIN_OF_ERROR;
             float z = transform.position.z;
 
             Vector3 position = new Vector3(x, y, z);
