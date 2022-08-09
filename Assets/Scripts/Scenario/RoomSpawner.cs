@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
@@ -24,9 +25,11 @@ public class RoomSpawner : MonoBehaviour
         {
             roomTemplates = GameObject.FindGameObjectWithTag("RoomTemplates").GetComponent<RoomTemplates>();
         }
-        
-        Invoke("SpawnRoom", ScenarioConstants.TIME_TO_GENERATE_NEW_ROOM);
 
+        Parallel.Invoke(() =>
+        {
+            Invoke("SpawnRoom", ScenarioConstants.TIME_TO_GENERATE_NEW_ROOM);
+        });
     }
 
     private void SpawnRoom()
@@ -78,7 +81,6 @@ public class RoomSpawner : MonoBehaviour
 
         if (other.CompareTag("RoomSpawnPoint"))
         {
-            
             if (!other.GetComponent<RoomSpawner>().isSpawned && !isSpawned)
             {
                 Instantiate(roomTemplates.closedRoom, transform.position, Quaternion.identity);
