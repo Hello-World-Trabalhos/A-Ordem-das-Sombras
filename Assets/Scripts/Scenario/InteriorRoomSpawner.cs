@@ -20,7 +20,7 @@ public class InteriorRoomSpawner : MonoBehaviour
 
         for (int i = 0; i < rooms.Length; i++)
         {
-            int index = 0;
+            int index = Random.Range(0, interiorRoomTemplates.interiorTemplates.Length);
             GameObject choosedInteriorRoomTemplate = interiorRoomTemplates.interiorTemplates[index].gameObject;
 
             Vector3 roomCenter = rooms[i].gameObject.transform.Find("SpawnPoints").Find("Destroyer").gameObject.transform.position;
