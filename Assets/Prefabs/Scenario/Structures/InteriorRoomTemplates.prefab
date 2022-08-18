@@ -44,4 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interiorTemplates:
+  - {fileID: 1407106070531658261, guid: 29dc762604553ed4194ff36c065a1229, type: 3}
+  - {fileID: 3614665149023416426, guid: 87635564c58144b4eae635cbbc204838, type: 3}
+  - {fileID: 6117275068424046005, guid: a57751a5aa1ccac488697d4de0c7f870, type: 3}
+  - {fileID: 3337982725908816666, guid: 8396155a412916649a1d0b6cb84d5ab7, type: 3}
   - {fileID: 7876795404995100354, guid: 9e7e84488df855840850b5af82711abb, type: 3}
