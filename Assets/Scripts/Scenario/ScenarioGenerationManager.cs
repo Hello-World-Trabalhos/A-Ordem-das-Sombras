@@ -10,6 +10,7 @@ public class ScenarioGenerationManager : MonoBehaviour
     private InteriorRoomStorage interiorRoomStorage;
     private ObstacleSpawner obstacleSpawner;
     private EnemySpawner enemySpawner;
+    private BossSpawner bossSpawner;
 
     private TimeUtils timeUtils = new TimeUtils();
     private float timeToWaitRoomsSpawn;
@@ -25,6 +26,7 @@ public class ScenarioGenerationManager : MonoBehaviour
         interiorRoomStorage = GameObject.Find("InteriorRoomStorage").GetComponent<InteriorRoomStorage>();
         obstacleSpawner = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>();
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+        bossSpawner = GameObject.Find("BossSpawner").GetComponent<BossSpawner>();
 
     }
 
@@ -34,6 +36,7 @@ public class ScenarioGenerationManager : MonoBehaviour
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
         obstacleSpawner.SpawnObstacles();
         enemySpawner.SpawnEnemies();
+        bossSpawner.spawnBoss();
     }
 
     private IEnumerator WaitAllRoomsBeSpawned()
