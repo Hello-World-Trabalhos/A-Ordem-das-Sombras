@@ -31,9 +31,7 @@ public class ScenarioGenerationManager : MonoBehaviour
     private void PrepareScenario()
     {
         // Aqui conterá todas as chamadas necessárias para gerenciar a criação do cenário
-        roomsStorage.CollectAllSpawnedRooms();
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
-        interiorRoomStorage.CollectAllSpawnedInteriorTemplates();
         obstacleSpawner.SpawnObstacles();
         enemySpawner.SpawnEnemies();
     }

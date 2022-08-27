@@ -6,21 +6,39 @@ public class InteriorRoomStorage : MonoBehaviour
 {
 
     private GameObject[] spawnedInteriorRooms;
-    private GameObject lastInteriorRoomSpawned;
 
     public void CollectAllSpawnedInteriorTemplates()
     {
         spawnedInteriorRooms = GameObject.FindGameObjectsWithTag("InteriorTemplate");
-        lastInteriorRoomSpawned = spawnedInteriorRooms[spawnedInteriorRooms.Length - 1];
     }
 
     public GameObject[] GetAllSpawnedInteriorRooms()
     {
+        if (spawnedInteriorRooms == null)
+        {
+            CollectAllSpawnedInteriorTemplates();
+        }
+
         return spawnedInteriorRooms;
     }
 
-    public GameObject GetLastInteriorRoomSpawned()
+    public GameObject GetPlayerInteriorRoom()
     {
-        return lastInteriorRoomSpawned;
+        if (spawnedInteriorRooms == null)
+        {
+            CollectAllSpawnedInteriorTemplates();
+        }
+        
+        return spawnedInteriorRooms[0];
+    }
+
+    public GameObject GetBossInteriorRoom()
+    {
+        if (spawnedInteriorRooms == null)
+        {
+            CollectAllSpawnedInteriorTemplates();
+        }
+        
+        return spawnedInteriorRooms[spawnedInteriorRooms.Length - 1];
     }
 }

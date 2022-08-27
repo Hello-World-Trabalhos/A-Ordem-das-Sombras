@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -25,8 +26,11 @@ public class EnemySpawner : MonoBehaviour
             return;
         }
 
-        // Mudar para um For comum, pois não pode aparecer na room inicial (Player) nem final (Boss)
-        foreach (var interiorRoom in interiorRoomStorage.GetAllSpawnedInteriorRooms())
+        List<GameObject> interiorRoomsToSpawnEnemies = interiorRoomStorage.GetAllSpawnedInteriorRooms().ToList();
+        interiorRoomsToSpawnEnemies.Remove(interiorRoomStorage.GetBossInteriorRoom());
+        interiorRoomsToSpawnEnemies.Remove(interiorRoomStorage.GetPlayerInteriorRoom());
+
+        foreach (GameObject interiorRoom in interiorRoomsToSpawnEnemies)
         {
             GameObject[] enemiesSpawns = GetEnemySpawnsFromInteriorRoom(interiorRoom);
             GameObject[] choosedEnemiesSpawns = ChooseEnemiesSpawnPoints(enemiesSpawns, enemiesPerRoom);
@@ -65,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
         {
             possibleIndex.Add(i);
         }
-        
+
         for (int i = 0; i < enemiesPerRoom; i++)
         {
             int randomIndex = Random.Range(0, possibleIndex.Count);

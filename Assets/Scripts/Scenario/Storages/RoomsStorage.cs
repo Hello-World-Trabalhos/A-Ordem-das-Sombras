@@ -5,21 +5,39 @@ using UnityEngine;
 public class RoomsStorage : MonoBehaviour
 {
     private GameObject[] spawnedRooms;
-    private GameObject lastSpawnedRoom;
 
     public void CollectAllSpawnedRooms()
     {
         spawnedRooms = GameObject.FindGameObjectsWithTag("Room");
-        lastSpawnedRoom = spawnedRooms[spawnedRooms.Length - 1];
     }
 
     public GameObject[] GetSpawnedRooms()
     {
+        if (spawnedRooms == null)
+        {
+            CollectAllSpawnedRooms();
+        }
+
         return spawnedRooms;
     }
 
-    public GameObject GetLastSpawnedRoom()
+    public GameObject GetPlayerRoom()
     {
-        return lastSpawnedRoom;
+        if (spawnedRooms == null)
+        {
+            CollectAllSpawnedRooms();
+        }
+        
+        return spawnedRooms[0];
+    }
+
+    public GameObject GetBossRoom()
+    {
+        if (spawnedRooms == null)
+        {
+            CollectAllSpawnedRooms();
+        }
+        
+        return spawnedRooms[spawnedRooms.Length - 1];
     }
 }
