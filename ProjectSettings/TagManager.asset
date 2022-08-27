@@ -16,6 +16,7 @@ TagManager:
   - EnemySpawn
   - ObstacleSpawn
   - InteriorTemplate
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
