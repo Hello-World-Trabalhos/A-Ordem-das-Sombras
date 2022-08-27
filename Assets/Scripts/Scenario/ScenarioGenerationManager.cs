@@ -35,7 +35,7 @@ public class ScenarioGenerationManager : MonoBehaviour
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
         interiorRoomStorage.CollectAllSpawnedInteriorTemplates();
         obstacleSpawner.SpawnObstacles();
-        enemySpawner.SpawnEmemies();
+        enemySpawner.SpawnEnemies();
     }
 
     private IEnumerator WaitAllRoomsBeSpawned()

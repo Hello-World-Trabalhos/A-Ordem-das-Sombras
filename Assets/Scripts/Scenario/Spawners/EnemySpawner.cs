@@ -13,13 +13,19 @@ public class EnemySpawner : MonoBehaviour
         interiorRoomStorage = GameObject.Find("InteriorRoomStorage").GetComponent<InteriorRoomStorage>();
     }
 
-    public void SpawnEmemies()
+    public void SpawnEnemies()
     {
         SpawnEnemies(ScenarioConstants.ENEMIES_PER_ROOM);
     }
 
     public void SpawnEnemies(int enemiesPerRoom)
     {
+        if (enemiesPerRoom <= 0)
+        {
+            return;
+        }
+
+        // Mudar para um For comum, pois não pode aparecer na room inicial (Player) nem final (Boss)
         foreach (var interiorRoom in interiorRoomStorage.GetAllSpawnedInteriorRooms())
         {
             GameObject[] enemiesSpawns = GetEnemySpawnsFromInteriorRoom(interiorRoom);
@@ -53,18 +59,18 @@ public class EnemySpawner : MonoBehaviour
     private GameObject[] ChooseEnemiesSpawnPoints(GameObject[] enemiesSpawns, int enemiesPerRoom)
     {
         GameObject[] choosedSpawns = new GameObject[enemiesPerRoom];
-        List<int> possibleIndexex = new List<int>();
+        List<int> possibleIndex = new List<int>();
 
-        for (int i = 0; i < enemiesPerRoom; i++)
+        for (int i = 0; i < enemiesSpawns.Length; i++)
         {
-            possibleIndexex.Add(i);
+            possibleIndex.Add(i);
         }
-
+        
         for (int i = 0; i < enemiesPerRoom; i++)
         {
-            int randomIndex = Random.Range(0, possibleIndexex.Count);
-            choosedSpawns[i] = enemiesSpawns[randomIndex];
-            possibleIndexex.Remove(randomIndex);
+            int randomIndex = Random.Range(0, possibleIndex.Count);
+            choosedSpawns[i] = enemiesSpawns[possibleIndex[randomIndex]];
+            possibleIndex.Remove(randomIndex);
         }
 
         return choosedSpawns;
