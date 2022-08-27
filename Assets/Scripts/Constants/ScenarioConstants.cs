@@ -9,6 +9,7 @@ public class ScenarioConstants : MonoBehaviour
     public const float X_SPAWN_MARGIN_OF_ERROR = -4.5f;
     public const float Y_SPAWN_MARGIN_OF_ERROR = 5.5f;
     public const float MARGIN_OF_ERROR_TO_WAIT_ROOMS_SPAWN = 0.2f;
+    public const int ENEMIES_PER_ROOM = 2;
 
     // adicionar constantes como:
     // número de inimigos, número de obstáculos, tempo até chamar o otimizador ....

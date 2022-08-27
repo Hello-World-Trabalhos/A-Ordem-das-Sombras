@@ -14,12 +14,12 @@ public class InteriorRoomStorage : MonoBehaviour
         lastInteriorRoomSpawned = spawnedInteriorRooms[spawnedInteriorRooms.Length - 1];
     }
 
-    public GameObject[] getSpawnedInteriorRooms()
+    public GameObject[] GetAllSpawnedInteriorRooms()
     {
         return spawnedInteriorRooms;
     }
 
-    public GameObject getLastInteriorRoomSpawned()
+    public GameObject GetLastInteriorRoomSpawned()
     {
         return lastInteriorRoomSpawned;
     }
