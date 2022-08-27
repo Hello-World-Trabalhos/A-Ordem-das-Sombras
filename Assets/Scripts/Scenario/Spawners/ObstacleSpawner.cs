@@ -23,7 +23,10 @@ public class ObstacleSpawner : MonoBehaviour
             int randomIndex = Random.Range(0, maxObstacleModelsIndex);
             GameObject obstacleToInstantiate = obstacleModelsReference.obstacleModels[randomIndex];
 
-            Instantiate(obstacleToInstantiate, spawnPoint.transform.position, Quaternion.identity);
+            Vector3 spawnPointPosition = spawnPoint.transform.position;
+            Vector3 positionToSpawn = new Vector3(spawnPointPosition.x, spawnPointPosition.y, 0);
+
+            Instantiate(obstacleToInstantiate, positionToSpawn, Quaternion.identity);
         }
     }
 }
