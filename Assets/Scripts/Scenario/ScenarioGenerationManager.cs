@@ -11,6 +11,7 @@ public class ScenarioGenerationManager : MonoBehaviour
     private ObstacleSpawner obstacleSpawner;
     private EnemySpawner enemySpawner;
     private BossSpawner bossSpawner;
+    private PlayerSpawner playerSpawner;
 
     private TimeUtils timeUtils = new TimeUtils();
     private float timeToWaitRoomsSpawn;
@@ -27,16 +28,16 @@ public class ScenarioGenerationManager : MonoBehaviour
         obstacleSpawner = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>();
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         bossSpawner = GameObject.Find("BossSpawner").GetComponent<BossSpawner>();
-
+        playerSpawner = GameObject.Find("PlayerSpawner").GetComponent<PlayerSpawner>();
     }
 
     private void PrepareScenario()
     {
-        // Aqui conterá todas as chamadas necessárias para gerenciar a criação do cenário
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
         obstacleSpawner.SpawnObstacles();
         enemySpawner.SpawnEnemies();
-        bossSpawner.spawnBoss();
+        bossSpawner.SpawnBoss();
+        playerSpawner.SpawnPlayer();
     }
 
     private IEnumerator WaitAllRoomsBeSpawned()

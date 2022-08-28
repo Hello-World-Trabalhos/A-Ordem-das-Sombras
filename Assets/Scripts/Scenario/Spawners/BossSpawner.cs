@@ -13,7 +13,7 @@ public class BossSpawner : MonoBehaviour
         interiorRoomStorage = GameObject.Find("InteriorRoomStorage").GetComponent<InteriorRoomStorage>();
     }
 
-    public void spawnBoss()
+    public void SpawnBoss()
     {
         GameObject spawn = interiorRoomStorage.GetBossInteriorRoom().transform.Find("BossSpawns").transform.GetChild(0).gameObject;
         Vector3 spawnPosition = spawn.transform.position;
