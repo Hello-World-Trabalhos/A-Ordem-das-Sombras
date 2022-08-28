@@ -12,6 +12,11 @@ TagManager:
   - Joystick
   - Wall
   - Room
+  - BossSpawn
+  - EnemySpawn
+  - ObstacleSpawn
+  - InteriorTemplate
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
