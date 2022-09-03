@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FirstScenario.unity
     guid: c55f294d3bdb8bb4186053116834d6be
   - enabled: 0
+    path: Assets/Scenes/ScenarioGenerationViewer.unity
+    guid: 02dab5c43ea5fe64a931801ed6230812
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: be5dcc52bbd32334ebc1d662868b0abf
   - enabled: 1
