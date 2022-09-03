@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class TouchActions : MonoBehaviour
 {
-    private const float MAX_X_CAMERA_AXIS = 150;
-    private const float MAX_Y_CAMERA_AXIS = 150;
-    private const float MIN_X_CAMERA_AXIS = MAX_X_CAMERA_AXIS * -1;
-    private const float MIN_Y_CAMERA_AXIS = MAX_Y_CAMERA_AXIS * -1;
-    private const float Z_CAMERA_AXIS = -10;
-
     private Vector3 origin;
     private Vector3 difference;
     private Vector3 initialCameraPoint;
@@ -55,31 +49,31 @@ public class TouchActions : MonoBehaviour
     {
         Vector3 actualCameraPosition = Camera.main.transform.position;
 
-        if (actualCameraPosition.x > MAX_X_CAMERA_AXIS)
+        if (actualCameraPosition.x > ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS)
         {
             Camera.main.transform.position = new Vector3(
-                MAX_X_CAMERA_AXIS, Camera.main.transform.position.y, Z_CAMERA_AXIS
+                ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS, Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
 
-        if (actualCameraPosition.y > MAX_Y_CAMERA_AXIS)
+        if (actualCameraPosition.y > ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS)
         {
             Camera.main.transform.position = new Vector3(
-                Camera.main.transform.position.x, MAX_Y_CAMERA_AXIS, Z_CAMERA_AXIS
+                Camera.main.transform.position.x, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
 
-        if (actualCameraPosition.x < MIN_X_CAMERA_AXIS)
+        if (actualCameraPosition.x < ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS)
         {
             Camera.main.transform.position = new Vector3(
-                MIN_X_CAMERA_AXIS, Camera.main.transform.position.y, Z_CAMERA_AXIS
+                ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
 
-        if (actualCameraPosition.y < MIN_Y_CAMERA_AXIS)
+        if (actualCameraPosition.y < ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS)
         {
             Camera.main.transform.position = new Vector3(
-                Camera.main.transform.position.x, MIN_Y_CAMERA_AXIS, Z_CAMERA_AXIS
+                Camera.main.transform.position.x, ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
     }
