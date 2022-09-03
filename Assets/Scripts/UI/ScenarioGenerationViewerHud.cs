@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ScenarioGenerationViewerHud : MonoBehaviour
+{
+    private Button pauseButton;
+    private GameObject pausePanel;
+    private TouchActions touchActions;
+
+    void Start()
+    {
+        pauseButton = gameObject.transform.Find("PauseButton").GetComponent<Button>();
+        pausePanel = gameObject.transform.Find("PausePanel").gameObject;
+        touchActions = GameObject.Find("TouchActions").GetComponent<TouchActions>();
+    }
+
+    public void PauseGame()
+    {
+        // Lembrar de adicionar pausa de tempo aqui
+        pauseButton.gameObject.SetActive(false);
+        touchActions.gameObject.SetActive(false);
+        pausePanel.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        pauseButton.gameObject.SetActive(true);
+        touchActions.gameObject.SetActive(true);
+        pausePanel.SetActive(false);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneLoader.LoadMainMenu();
+    }
+}
