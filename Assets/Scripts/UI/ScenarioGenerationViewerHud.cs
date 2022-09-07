@@ -12,8 +12,6 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
     private GameObject scenarioGenerationConfigPanel;
     private TouchActions touchActions;
 
-    private ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
-
     void Start()
     {
         pauseButton = gameObject.transform.Find("PauseButton").GetComponent<Button>();
@@ -22,18 +20,6 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         pausePanel = gameObject.transform.Find("PausePanel").gameObject;
         touchActions = GameObject.Find("TouchActions").GetComponent<TouchActions>();
         scenarioGenerationConfigPanel = gameObject.transform.Find("ScenarioGenerationConfigPanel").gameObject;
-
-        SettingsButtonSprites settingsButtonSprites = gameObject.GetComponent<SettingsButtonSprites>();
-        Image scenarioGenerationSettingsImage = scenarioGenerationSettings.GetComponent<Image>();
-
-        if (playerPrefsSaver.IsLightbackgroundEnabled())
-        {
-            scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetBlackButtonVariation();
-        }
-        else
-        {
-            scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetWhiteButtonVariation();
-        }
     }
 
     public void PauseGame()
@@ -48,6 +34,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void ResumeGame()
     {
+        // Lembrar de remover pausa de tempo aqui
         pauseButton.gameObject.SetActive(true);
         scenarioGeneratorButton.gameObject.SetActive(true);
         scenarioGenerationSettings.gameObject.SetActive(true);
@@ -58,6 +45,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void OpenConfigPanel()
     {
+        // Lembrar de adicionar pausa de tempo aqui
         pauseButton.gameObject.SetActive(false);
         scenarioGeneratorButton.gameObject.SetActive(false);
         scenarioGenerationSettings.gameObject.SetActive(false);
@@ -72,19 +60,17 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         Toggle generateEnemiesToggle = GameObject.Find("GenerateEnemiesToggle").GetComponent<Toggle>();
         Toggle generatePlayerToggle = GameObject.Find("GeneratePlayerToggle").GetComponent<Toggle>();
         Toggle generateBossToggle = GameObject.Find("GenerateBossToggle").GetComponent<Toggle>();
-        Toggle scenarioBackgroundToggle = GameObject.Find("ScenarioBackgroundToggle").GetComponent<Toggle>();
         Slider enemiesAmmountSlider = GameObject.Find("EnemySlider").GetComponent<Slider>();
         Text enemiesCount = GameObject.Find("EnemiesSliderCount").GetComponent<Text>();
 
-        ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
+        ScenarioGenerationConfig scenarioGenerationConfig = new ScenarioGenerationConfig();
 
-        generateObstaclesToggle.isOn = playerPrefsSaver.IsObstacleGenerationEnabled();
-        generateEnemiesToggle.isOn = playerPrefsSaver.IsEnemyGenerationEnabled();
-        generatePlayerToggle.isOn = playerPrefsSaver.IsPlayerGenerationEnabled();
-        generateBossToggle.isOn = playerPrefsSaver.IsBossGenerationEnabled();
-        scenarioBackgroundToggle.isOn = playerPrefsSaver.IsLightbackgroundEnabled();
-        enemiesAmmountSlider.value = playerPrefsSaver.GetEnemiesAmmount();
-        enemiesCount.text = playerPrefsSaver.GetEnemiesAmmount().ToString();
+        generateObstaclesToggle.isOn = scenarioGenerationConfig.IsObstacleGenerationEnabled();
+        generateEnemiesToggle.isOn = scenarioGenerationConfig.IsEnemyGenerationEnabled();
+        generatePlayerToggle.isOn = scenarioGenerationConfig.IsPlayerGenerationEnabled();
+        generateBossToggle.isOn = scenarioGenerationConfig.IsBossGenerationEnabled();
+        enemiesAmmountSlider.value = scenarioGenerationConfig.GetEnemiesAmmount();
+        enemiesCount.text = scenarioGenerationConfig.GetEnemiesAmmount().ToString();
     }
 
     public void GenerateNewScenario()

@@ -17,12 +17,10 @@ public class ScenarioGeneratiorViewerConstants
     public const string ENABLE_PLAYER_GENERATION = "ENABLE_PLAYER_GENERATION";
     public const string ENABLE_BOSS_GENERATION = "ENABLE_BOSS_GENERATION";
     public const string ENEMIES_AMOUNT = "ENEMIES_AMOUNT";
-    public const string ENABLE_LIGHT_BACKGROUND = "ENABLE_LIGHT_BACKGROUND";
 
     public const bool ENABLE_OBSTACLES_GENERATION_DEFAULT_VALUE = true;
     public const bool ENABLE_ENEMIES_GENERATION_DEFAULT_VALUE = true;
     public const bool ENABLE_PLAYER_GENERATION_DEFAULT_VALUE = true;
     public const bool ENABLE_BOSS_GENERATION_DEFAULT_VALUE = true;
     public const int ENEMIES_AMOUNT_DEFAULT_VALUE = 2;
-    public const bool ENABLE_LIGHT_BACKGROUND_DEFAULT_VALUE = false;
 }

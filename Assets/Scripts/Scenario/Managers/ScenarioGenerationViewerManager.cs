@@ -13,6 +13,8 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
     private PlayerSpawner playerSpawner;
     private RoomSpawnWait roomSpawnWait;
 
+
+    private ScenarioGenerationConfig scenarioGenerationConfig = new ScenarioGenerationConfig();
     private TimeUtils timeUtils = new TimeUtils();
 
     void Start()
@@ -44,24 +46,24 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
     private void PrepareScenario()
     {
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
-        
-        // verificar se geração de obstáculos está ativada ou não
-        obstacleSpawner.SpawnObstacles();
+        if (scenarioGenerationConfig.IsObstacleGenerationEnabled())
+        {
+            obstacleSpawner.SpawnObstacles();
+        }
 
-        // verificar se os inimigos estão spawnados ou não
-        // lembrar também de chamar o SpawnEnemies(quantiaInimigosSalvaNasConfigs)
-        enemySpawner.SpawnEnemies();
+        if (scenarioGenerationConfig.IsEnemyGenerationEnabled())
+        {
+            enemySpawner.SpawnEnemies(scenarioGenerationConfig.GetEnemiesAmmount());
+        }
 
-        // verificar se a geração do boss está ativada ou não
-        bossSpawner.SpawnBoss();
+        if (scenarioGenerationConfig.IsBossGenerationEnabled())
+        {
+            bossSpawner.SpawnBoss();
+        }
 
-        // verificar se a geração do player está ativada ou não
-        playerSpawner.SpawnPlayer();
-
-        // adicionar verificacao da cor de fundo da camera
-        //  deve alterar cor do fundo e a cor da engrenagem, por isso terá 2 sprites, um claro e outro escuro
-        //  para dar destaque e a pessoa conseguir ver
-
-        // adicionar o optimizer aqui
+        if (scenarioGenerationConfig.IsPlayerGenerationEnabled())
+        {
+            playerSpawner.SpawnPlayer();
+        }
     }
 }

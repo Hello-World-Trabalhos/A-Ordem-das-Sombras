@@ -44,12 +44,6 @@ public class ScenarioGenerationConfig
         PlayerPrefs.Save();
     }
 
-    public void EnableLightBackground(bool value)
-    {
-        PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND, value.ToString());
-        PlayerPrefs.Save();
-    }
-
     public bool IsObstacleGenerationEnabled()
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION))
@@ -100,19 +94,6 @@ public class ScenarioGenerationConfig
         }
 
         return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION));
-    }
-
-    public bool IsLightbackgroundEnabled()
-    {
-        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND))
-        {
-            PlayerPrefs.SetString(
-                ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND,
-                ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND_DEFAULT_VALUE.ToString()
-            );
-        }
-
-        return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND));
     }
 
     public int GetEnemiesAmmount()

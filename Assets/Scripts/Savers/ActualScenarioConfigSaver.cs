@@ -11,7 +11,6 @@ public class ActualScenarioConfigSaver
         Toggle generateEnemiesToggle = GameObject.Find("GenerateEnemiesToggle").GetComponent<Toggle>();
         Toggle generatePlayerToggle = GameObject.Find("GeneratePlayerToggle").GetComponent<Toggle>();
         Toggle generateBossToggle = GameObject.Find("GenerateBossToggle").GetComponent<Toggle>();
-        Toggle scenarioBackgroundToggle = GameObject.Find("ScenarioBackgroundToggle").GetComponent<Toggle>();
         Slider enemiesAmmountSlider = GameObject.Find("EnemySlider").GetComponent<Slider>();
         Text enemiesCount = GameObject.Find("EnemiesSliderCount").GetComponent<Text>();
 
@@ -19,16 +18,14 @@ public class ActualScenarioConfigSaver
         generateEnemiesToggle.interactable = false;
         generatePlayerToggle.interactable = false;
         generateBossToggle.interactable = false;
-        scenarioBackgroundToggle.interactable = false;
         enemiesAmmountSlider.interactable = false;
 
-        ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
+        ScenarioGenerationConfig scenarioGenerationConfig = new ScenarioGenerationConfig();
 
-        playerPrefsSaver.EnableObstaclesGeneration(generateObstaclesToggle.isOn);
-        playerPrefsSaver.EnableEnemiesGeneration(generateEnemiesToggle.isOn);
-        playerPrefsSaver.EnablePlayerGeneration(generatePlayerToggle.isOn);
-        playerPrefsSaver.EnableBossGeneration(generateBossToggle.isOn);
-        playerPrefsSaver.EnableLightBackground(scenarioBackgroundToggle.isOn);
-        playerPrefsSaver.EnemiesAmmount(int.Parse(enemiesCount.text.Trim()));
+        scenarioGenerationConfig.EnableObstaclesGeneration(generateObstaclesToggle.isOn);
+        scenarioGenerationConfig.EnableEnemiesGeneration(generateEnemiesToggle.isOn);
+        scenarioGenerationConfig.EnablePlayerGeneration(generatePlayerToggle.isOn);
+        scenarioGenerationConfig.EnableBossGeneration(generateBossToggle.isOn);
+        scenarioGenerationConfig.EnemiesAmmount(int.Parse(enemiesCount.text.Trim()));
     }
 }
