@@ -55,6 +55,12 @@ public class TouchActions : MonoBehaviour
                 ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS, Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
+        else if (actualCameraPosition.x < ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS)
+        {
+            Camera.main.transform.position = new Vector3(
+                ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
+            );
+        }
 
         if (actualCameraPosition.y > ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS)
         {
@@ -62,15 +68,7 @@ public class TouchActions : MonoBehaviour
                 Camera.main.transform.position.x, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
             );
         }
-
-        if (actualCameraPosition.x < ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS)
-        {
-            Camera.main.transform.position = new Vector3(
-                ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
-            );
-        }
-
-        if (actualCameraPosition.y < ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS)
+        else if (actualCameraPosition.y < ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS)
         {
             Camera.main.transform.position = new Vector3(
                 Camera.main.transform.position.x, ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
