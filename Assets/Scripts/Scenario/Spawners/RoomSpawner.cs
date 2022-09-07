@@ -12,7 +12,7 @@ public class RoomSpawner : MonoBehaviour
     }
 
     private static RoomTemplates roomTemplates;
-    private static ScenarioGenerationManager scenarioGenerationManager;
+    private static RoomSpawnWait roomSpawnWait;
 
     public Direction roomConnectedDoorDirection;
     private bool isSpawned = false;
@@ -24,9 +24,9 @@ public class RoomSpawner : MonoBehaviour
             roomTemplates = GameObject.FindGameObjectWithTag("RoomTemplates").GetComponent<RoomTemplates>();
         }
 
-        if (scenarioGenerationManager == null)
+        if (roomSpawnWait == null)
         {
-            scenarioGenerationManager = GameObject.Find("ScenarioGenerationManager").GetComponent<ScenarioGenerationManager>();
+            roomSpawnWait = GameObject.Find("RoomSpawnWait").GetComponent<RoomSpawnWait>();
         }
 
         Parallel.Invoke(() =>
@@ -34,7 +34,7 @@ public class RoomSpawner : MonoBehaviour
             Invoke("SpawnRoom", ScenarioConstants.TIME_TO_GENERATE_NEW_ROOM);
         });
 
-        scenarioGenerationManager.ResetTimeToWaitRoomsSpawn();
+        roomSpawnWait.ResetTimeToWaitRoomsSpawn();
     }
 
     private void SpawnRoom()
