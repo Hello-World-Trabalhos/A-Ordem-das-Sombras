@@ -119,6 +119,6 @@ public class PlayerPrefsSaver
             );
         }
 
-        return int.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT));
+        return PlayerPrefs.GetInt(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT);
     }
 }

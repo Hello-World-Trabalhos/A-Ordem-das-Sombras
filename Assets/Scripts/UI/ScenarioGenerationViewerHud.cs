@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
     private Button scenarioGeneratorButton;
     private Button scenarioGenerationSettings;
     private GameObject pausePanel;
+    private GameObject scenarioGenerationConfigPanel;
     private TouchActions touchActions;
 
     private PlayerPrefsSaver playerPrefsSaver = new PlayerPrefsSaver();
@@ -20,6 +22,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         scenarioGenerationSettings = GameObject.Find("ScenarioGenerationSettingsButton").GetComponent<Button>();
         pausePanel = gameObject.transform.Find("PausePanel").gameObject;
         touchActions = GameObject.Find("TouchActions").GetComponent<TouchActions>();
+        scenarioGenerationConfigPanel = gameObject.transform.Find("ScenarioGenerationConfigPanel").gameObject;
 
         SettingsButtonSprites settingsButtonSprites = gameObject.GetComponent<SettingsButtonSprites>();
         Image scenarioGenerationSettingsImage = scenarioGenerationSettings.GetComponent<Image>();
@@ -27,7 +30,9 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         if (playerPrefsSaver.IsLightbackgroundEnabled())
         {
             scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetBlackButtonVariation();
-        } else {
+        }
+        else
+        {
             scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetWhiteButtonVariation();
         }
     }
@@ -49,11 +54,30 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         scenarioGenerationSettings.gameObject.SetActive(true);
         touchActions.gameObject.SetActive(true);
         pausePanel.SetActive(false);
+        scenarioGenerationConfigPanel.SetActive(false);
+    }
+
+    public void OpenConfigPanel() {
+        pauseButton.gameObject.SetActive(false);
+        scenarioGeneratorButton.gameObject.SetActive(false);
+        scenarioGenerationSettings.gameObject.SetActive(false);
+        touchActions.gameObject.SetActive(false);
+        scenarioGenerationConfigPanel.SetActive(true);
     }
 
     public void GenerateNewScenario()
     {
         SceneLoader.ReloadCurrentScene();
+    }
+
+    public void GenerateNewScenarioSavingConfigurations()
+    {
+        GameObject.Find("ScenarioGeneratorSavingChangesButton").GetComponent<Button>().interactable = false;
+
+        Parallel.Invoke(() => {
+            new NewScenarioConfigSaver().SaveValuesFromActualScene();
+            GenerateNewScenario();
+        });
     }
 
     public void LoadMainMenu()
