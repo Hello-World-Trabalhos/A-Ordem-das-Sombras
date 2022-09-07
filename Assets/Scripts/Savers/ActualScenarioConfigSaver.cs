@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NewScenarioConfigSaver
+public class ActualScenarioConfigSaver
 {
     public void SaveValuesFromActualScene()
     {
@@ -22,7 +22,7 @@ public class NewScenarioConfigSaver
         scenarioBackgroundToggle.interactable = false;
         enemiesAmmountSlider.interactable = false;
 
-        PlayerPrefsSaver playerPrefsSaver = new PlayerPrefsSaver();
+        ScenarioGenerationConfigSaver playerPrefsSaver = new ScenarioGenerationConfigSaver();
 
         playerPrefsSaver.EnableObstaclesGeneration(generateObstaclesToggle.isOn);
         playerPrefsSaver.EnableEnemiesGeneration(generateEnemiesToggle.isOn);

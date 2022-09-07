@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerPrefsSaver
+public class ScenarioGenerationConfigSaver
 {
     public void EnableObstaclesGeneration(bool value)
     {
