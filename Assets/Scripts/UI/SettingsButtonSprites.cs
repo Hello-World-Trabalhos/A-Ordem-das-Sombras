@@ -5,8 +5,8 @@ using UnityEngine;
 public class SettingsButtonSprites : MonoBehaviour
 {
     public Sprite[] configButtonSprites;
-    public int blackButtonIndex;
-    public int whiteButtonIndex;
+    private int blackButtonIndex;
+    private int whiteButtonIndex;
 
     void Start()
     {
