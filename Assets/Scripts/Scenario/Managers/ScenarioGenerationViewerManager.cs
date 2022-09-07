@@ -58,6 +58,10 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
         // verificar se a geração do player está ativada ou não
         playerSpawner.SpawnPlayer();
 
+        // adicionar verificacao da cor de fundo da camera
+        //  deve alterar cor do fundo e a cor da engrenagem, por isso terá 2 sprites, um claro e outro escuro
+        //  para dar destaque e a pessoa conseguir ver
+
         // adicionar o optimizer aqui
     }
 }
