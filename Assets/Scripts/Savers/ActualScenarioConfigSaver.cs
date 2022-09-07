@@ -22,7 +22,7 @@ public class ActualScenarioConfigSaver
         scenarioBackgroundToggle.interactable = false;
         enemiesAmmountSlider.interactable = false;
 
-        ScenarioGenerationConfigSaver playerPrefsSaver = new ScenarioGenerationConfigSaver();
+        ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
 
         playerPrefsSaver.EnableObstaclesGeneration(generateObstaclesToggle.isOn);
         playerPrefsSaver.EnableEnemiesGeneration(generateEnemiesToggle.isOn);

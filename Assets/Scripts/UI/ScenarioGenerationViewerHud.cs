@@ -12,7 +12,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
     private GameObject scenarioGenerationConfigPanel;
     private TouchActions touchActions;
 
-    private ScenarioGenerationConfigSaver playerPrefsSaver = new ScenarioGenerationConfigSaver();
+    private ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
 
     void Start()
     {
@@ -76,7 +76,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         Slider enemiesAmmountSlider = GameObject.Find("EnemySlider").GetComponent<Slider>();
         Text enemiesCount = GameObject.Find("EnemiesSliderCount").GetComponent<Text>();
 
-        ScenarioGenerationConfigSaver playerPrefsSaver = new ScenarioGenerationConfigSaver();
+        ScenarioGenerationConfig playerPrefsSaver = new ScenarioGenerationConfig();
 
         generateObstaclesToggle.isOn = playerPrefsSaver.IsObstacleGenerationEnabled();
         generateEnemiesToggle.isOn = playerPrefsSaver.IsEnemyGenerationEnabled();
