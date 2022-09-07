@@ -17,7 +17,6 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Esse é o novo, que deve substituir a outra prefab");
         roomSpawnWait = GameObject.Find("RoomSpawnWait").GetComponent<RoomSpawnWait>();
         roomSpawnWait.ResetTimeToWaitRoomsSpawn();
         StartCoroutine(WaitAllRoomsBeSpawned());
@@ -45,9 +44,20 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
     private void PrepareScenario()
     {
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
+        
+        // verificar se geração de obstáculos está ativada ou não
         obstacleSpawner.SpawnObstacles();
+
+        // verificar se os inimigos estão spawnados ou não
+        // lembrar também de chamar o SpawnEnemies(quantiaInimigosSalvaNasConfigs)
         enemySpawner.SpawnEnemies();
+
+        // verificar se a geração do boss está ativada ou não
         bossSpawner.SpawnBoss();
+
+        // verificar se a geração do player está ativada ou não
         playerSpawner.SpawnPlayer();
+
+        // adicionar o optimizer aqui
     }
 }
