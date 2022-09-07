@@ -11,6 +11,8 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
     private GameObject pausePanel;
     private TouchActions touchActions;
 
+    private PlayerPrefsSaver playerPrefsSaver = new PlayerPrefsSaver();
+
     void Start()
     {
         pauseButton = gameObject.transform.Find("PauseButton").GetComponent<Button>();
@@ -18,6 +20,16 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         scenarioGenerationSettings = GameObject.Find("ScenarioGenerationSettingsButton").GetComponent<Button>();
         pausePanel = gameObject.transform.Find("PausePanel").gameObject;
         touchActions = GameObject.Find("TouchActions").GetComponent<TouchActions>();
+
+        SettingsButtonSprites settingsButtonSprites = gameObject.GetComponent<SettingsButtonSprites>();
+        Image scenarioGenerationSettingsImage = scenarioGenerationSettings.GetComponent<Image>();
+
+        if (playerPrefsSaver.IsLightbackgroundEnabled())
+        {
+            scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetBlackButtonVariation();
+        } else {
+            scenarioGenerationSettingsImage.sprite = settingsButtonSprites.GetWhiteButtonVariation();
+        }
     }
 
     public void PauseGame()

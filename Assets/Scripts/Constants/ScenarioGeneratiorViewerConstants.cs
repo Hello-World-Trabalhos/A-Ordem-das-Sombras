@@ -24,5 +24,5 @@ public class ScenarioGeneratiorViewerConstants
     public const bool ENABLE_PLAYER_GENERATION_DEFAULT_VALUE = true;
     public const bool ENABLE_BOSS_GENERATION_DEFAULT_VALUE = true;
     public const int ENEMIES_AMOUNT_DEFAULT_VALUE = 2;
-    public const bool ENABLE_LIGHT_BACKGROUND_DEFAULT_VALUE = true;
+    public const bool ENABLE_LIGHT_BACKGROUND_DEFAULT_VALUE = false;
 }
