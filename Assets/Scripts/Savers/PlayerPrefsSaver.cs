@@ -8,21 +8,25 @@ public class PlayerPrefsSaver
     public void EnableObstaclesGeneration(bool value)
     {
         PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION, value.ToString());
+        PlayerPrefs.Save();
     }
 
     public void EnableEnemiesGeneration(bool value)
     {
         PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION, value.ToString());
+        PlayerPrefs.Save();
     }
 
     public void EnablePlayerGeneration(bool value)
     {
         PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION, value.ToString());
+        PlayerPrefs.Save();
     }
 
     public void EnableBossGeneration(bool value)
     {
         PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION, value.ToString());
+        PlayerPrefs.Save();
     }
 
     public void EnemiesAmmount(int value)
@@ -37,16 +41,18 @@ public class PlayerPrefsSaver
         }
 
         PlayerPrefs.SetInt(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT, value);
+        PlayerPrefs.Save();
     }
 
     public void EnableLightBackground(bool value)
     {
         PlayerPrefs.SetString(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND, value.ToString());
+        PlayerPrefs.Save();
     }
 
     public bool IsObstacleGenerationEnabled()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION))
         {
             PlayerPrefs.SetString(
                 ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION, 
@@ -59,7 +65,7 @@ public class PlayerPrefsSaver
 
     public bool IsEnemyGenerationEnabled()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION))
         {
             PlayerPrefs.SetString(
                 ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION,
@@ -72,7 +78,7 @@ public class PlayerPrefsSaver
 
     public bool IsPlayerGenerationEnabled()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION))
         {
             PlayerPrefs.SetString(
                 ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION,
@@ -85,7 +91,7 @@ public class PlayerPrefsSaver
 
     public bool IsBossGenerationEnabled()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION))
         {
             PlayerPrefs.SetString(
                 ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION,
@@ -98,7 +104,7 @@ public class PlayerPrefsSaver
 
     public bool IsLightbackgroundEnabled()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND))
         {
             PlayerPrefs.SetString(
                 ScenarioGeneratiorViewerConstants.ENABLE_LIGHT_BACKGROUND,
@@ -111,7 +117,7 @@ public class PlayerPrefsSaver
 
     public int GetEnemiesAmmount()
     {
-        if (!PlayerPrefs.HasKey(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT)))
+        if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT))
         {
             PlayerPrefs.SetInt(
                 ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT,

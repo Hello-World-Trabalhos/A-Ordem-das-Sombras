@@ -16,10 +16,6 @@ public class SliderValueShower : MonoBehaviour
 
         enemySlider.minValue = ScenarioGeneratiorViewerConstants.MIN_ENEMIES_AMMOUNT;
         enemySlider.maxValue = ScenarioGeneratiorViewerConstants.MAX_ENEMIES_AMMOUNT;
-        enemySlider.value = Mathf.RoundToInt(ScenarioGeneratiorViewerConstants.MAX_ENEMIES_AMMOUNT / 2);
-
-        enemySliderCount.text = Mathf.RoundToInt(enemySlider.value).ToString();
-
     }
 
     public void UpdateEnemySliderCount(float sliderValue)
