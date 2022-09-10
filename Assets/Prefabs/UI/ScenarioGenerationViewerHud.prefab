@@ -999,7 +999,7 @@ GameObject:
   - component: {fileID: 316459095721131429}
   - component: {fileID: 316459095721131417}
   m_Layer: 5
-  m_Name: ScenarioGenerationViewerPauseMenu
+  m_Name: ScenarioGenerationViewerHud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
