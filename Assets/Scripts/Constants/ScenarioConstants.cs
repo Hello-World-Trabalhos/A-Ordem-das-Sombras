@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScenarioConstants : MonoBehaviour
+public class ScenarioConstants
 {
     public const float TIME_TO_GENERATE_NEW_ROOM = 0.1f;
     public const float TIME_TO_START_SCENARIO_PREPARATION = 5.0f;

@@ -7,9 +7,12 @@ public class ScenarioOptmizer : MonoBehaviour
 
     void Start()
     {
-        // irá guardar alguns dados, para quando tudo ser gerado, destruir o que não será mais usado para essa geração
-        // como por exemplo, spawnpoints, destroyers, room templates, essas coisas, influsive esse proprio objeto
-        // talvez inicialmente usar um invoke com um tempo, 10 segundos por exemplo, depois pensar em uma maneira
-        // de chamar esse componente exatamente quando o boss spawnar
+        // irá limpar da cena todos os objetos que não necessitam mais existirem
+
+        // lembrando que a destruição do 
+        //   ScenarioGenerationManager
+        //   ScenarioGenerationViewerManager
+        // deve ser feita por último, pois é aquele que realiza isso
+        // ou talvez um destroy com await, tipo, destroy(obj, depoisNSegundos)
     }
 }
