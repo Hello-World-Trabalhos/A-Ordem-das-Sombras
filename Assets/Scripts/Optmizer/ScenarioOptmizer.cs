@@ -1,18 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
-public class ScenarioOptmizer : MonoBehaviour
+public class ScenarioOptmizer
 {
-
-    void Start()
+    public void OptimizeScenario()
     {
-        // irá limpar da cena todos os objetos que não necessitam mais existirem
+        DestroyInteriorTemplates();
+        DestroyRoomsSpawnPoints();
+        DestroyClosedRoomsWithEqualPositions();
 
-        // lembrando que a destruição do 
-        //   ScenarioGenerationManager
-        //   ScenarioGenerationViewerManager
-        // deve ser feita por último, pois é aquele que realiza isso
-        // ou talvez um destroy com await, tipo, destroy(obj, depoisNSegundos)
+        Debug.Log("Otimização do cenário finalizada!");
+    }
+
+    private void DestroyInteriorTemplates()
+    {
+        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("InteriorTemplate");
+
+        for (int i = 0; i < spawnPoints.Length; i++)
+        {
+            Object.Destroy(spawnPoints[i]);
+        }
+
+        Debug.Log("InteriorTemplates destroyed");
+    }
+
+    private void DestroyRoomsSpawnPoints()
+    {
+        GameObject[] rooms = GameObject.FindGameObjectsWithTag("Room");
+
+        for (int i = 0; i < rooms.Length; i++)
+        {
+            Object.Destroy(rooms[i].transform.Find("SpawnPoints").gameObject);
+        }
+
+        Debug.Log("RoomsspawnPoints destroyed");
+    }
+
+    private void DestroyClosedRoomsWithEqualPositions()
+    {
+
     }
 }

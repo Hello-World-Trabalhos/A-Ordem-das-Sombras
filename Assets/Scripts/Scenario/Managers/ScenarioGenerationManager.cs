@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ScenarioGenerationManager : MonoBehaviour
@@ -14,6 +15,7 @@ public class ScenarioGenerationManager : MonoBehaviour
     private PlayerSpawner playerSpawner;
     private RoomSpawnWait roomSpawnWait;
 
+    private ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
     private TimeUtils timeUtils = new TimeUtils();
 
 
@@ -50,5 +52,7 @@ public class ScenarioGenerationManager : MonoBehaviour
         enemySpawner.SpawnEnemies();
         bossSpawner.SpawnBoss();
         playerSpawner.SpawnPlayer();
+
+        Parallel.Invoke(() => scenarioOptmizer.OptimizeScenario());
     }
 }
