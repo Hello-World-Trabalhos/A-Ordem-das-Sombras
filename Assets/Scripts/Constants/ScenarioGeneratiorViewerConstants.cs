@@ -9,6 +9,11 @@ public class ScenarioGeneratiorViewerConstants
     public const float MIN_X_CAMERA_AXIS = MAX_X_CAMERA_AXIS * -1;
     public const float MIN_Y_CAMERA_AXIS = MAX_Y_CAMERA_AXIS * -1;
     public const float Z_CAMERA_AXIS = -10;
+
+    public const float MIN_CAMERA_ZOOM = 5f;
+    public const float MAX_CAMERA_ZOOM = 80f;
+    public const float CAMERA_ZOOM_SPEED = 0.035f;
+
     public const int MIN_ENEMIES_AMMOUNT = 0;
     public const int MAX_ENEMIES_AMMOUNT = 4;
 
