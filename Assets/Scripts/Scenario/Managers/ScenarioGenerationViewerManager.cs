@@ -48,6 +48,7 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
     private void PrepareScenario()
     {
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
+        
         if (scenarioGenerationConfig.IsObstacleGenerationEnabled())
         {
             obstacleSpawner.SpawnObstacles();
@@ -65,7 +66,7 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
 
         if (scenarioGenerationConfig.IsPlayerGenerationEnabled())
         {
-            playerSpawner.SpawnPlayer();
+            playerSpawner.SpawnPlayerWithoutScript();
         }
 
         Parallel.Invoke(() => scenarioOptmizer.OptimizeScenario());
