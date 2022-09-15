@@ -6,6 +6,7 @@ public class PlayerSpawner : MonoBehaviour
 {
     private PlayerModels playerModels;
     private InteriorRoomStorage interiorRoomStorage;
+    private GameObject spawnedPlayerReference;
 
     void Start()
     {
@@ -19,6 +20,12 @@ public class PlayerSpawner : MonoBehaviour
         Vector3 spawnPosition = spawn.transform.position;
         Vector3 positionToSpawn = new Vector3(spawnPosition.x, spawnPosition.y, 0);
 
-        Instantiate(playerModels.playerModel, positionToSpawn, Quaternion.identity);
+        spawnedPlayerReference = Instantiate(playerModels.playerModel, positionToSpawn, Quaternion.identity);
+    }
+
+    public void SpawnPlayerWithoutScript()
+    {
+        SpawnPlayer();
+        Destroy(spawnedPlayerReference.GetComponent<PlayerController>());
     }
 }

@@ -10,6 +10,11 @@ public class SceneLoader : MonoBehaviour
         LoadScene(MAIN_MENU_SCENE_INDEX);
     }
 
+    public static void ReloadCurrentScene()
+    {
+        LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
     public static void LoadScene(int index)
     {
         // Implementar telas de loading e tal, aqui, nesse local
