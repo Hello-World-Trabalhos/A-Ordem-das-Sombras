@@ -502,7 +502,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 316459095721131426, guid: a8455d3c0e774bc47ad2fa273d9ee70e, type: 3}
       propertyPath: m_Name
-      value: ScenarioGenerationViewerPauseMenu
+      value: ScenarioGenerationViewerHud
       objectReference: {fileID: 0}
     - target: {fileID: 316459095721131430, guid: a8455d3c0e774bc47ad2fa273d9ee70e, type: 3}
       propertyPath: m_Pivot.x

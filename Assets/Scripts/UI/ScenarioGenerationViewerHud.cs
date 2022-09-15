@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ScenarioGenerationViewerHud : MonoBehaviour
 {
+    private readonly GameStateManager gameStateManager = new GameStateManager();
     private Button pauseButton;
     private Button scenarioGeneratorButton;
     private Button scenarioGenerationSettings;
@@ -24,7 +25,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void PauseGame()
     {
-        // Lembrar de adicionar pausa de tempo aqui
+        gameStateManager.PauseGame();
         pauseButton.gameObject.SetActive(false);
         scenarioGeneratorButton.gameObject.SetActive(false);
         scenarioGenerationSettings.gameObject.SetActive(false);
@@ -34,7 +35,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void ResumeGame()
     {
-        // Lembrar de remover pausa de tempo aqui
+        gameStateManager.ResumeGame();
         pauseButton.gameObject.SetActive(true);
         scenarioGeneratorButton.gameObject.SetActive(true);
         scenarioGenerationSettings.gameObject.SetActive(true);
@@ -45,7 +46,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void OpenConfigPanel()
     {
-        // Lembrar de adicionar pausa de tempo aqui
+        gameStateManager.PauseGame();
         pauseButton.gameObject.SetActive(false);
         scenarioGeneratorButton.gameObject.SetActive(false);
         scenarioGenerationSettings.gameObject.SetActive(false);
@@ -73,11 +74,6 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         enemiesCount.text = scenarioGenerationConfig.GetEnemiesAmmount().ToString();
     }
 
-    public void GenerateNewScenario()
-    {
-        SceneLoader.ReloadCurrentScene();
-    }
-
     public void GenerateNewScenarioSavingConfigurations()
     {
         GameObject.Find("ScenarioGeneratorSavingChangesButton").GetComponent<Button>().interactable = false;
@@ -86,8 +82,15 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
         GenerateNewScenario();
     }
 
+    public void GenerateNewScenario()
+    {
+        gameStateManager.ResumeGame();
+        SceneLoader.ReloadCurrentScene();
+    }
+
     public void LoadMainMenu()
     {
+        gameStateManager.ResumeGame();
         SceneLoader.LoadMainMenu();
     }
 }

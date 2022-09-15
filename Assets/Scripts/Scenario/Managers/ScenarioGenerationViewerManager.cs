@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class ScenarioGenerationViewerManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
 
 
     private ScenarioGenerationConfig scenarioGenerationConfig = new ScenarioGenerationConfig();
+    private ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
     private TimeUtils timeUtils = new TimeUtils();
 
     void Start()
@@ -46,6 +48,7 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
     private void PrepareScenario()
     {
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
+        
         if (scenarioGenerationConfig.IsObstacleGenerationEnabled())
         {
             obstacleSpawner.SpawnObstacles();
@@ -63,7 +66,9 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
 
         if (scenarioGenerationConfig.IsPlayerGenerationEnabled())
         {
-            playerSpawner.SpawnPlayer();
+            playerSpawner.SpawnPlayerWithoutScript();
         }
+
+        Parallel.Invoke(() => scenarioOptmizer.OptimizeScenario());
     }
 }
