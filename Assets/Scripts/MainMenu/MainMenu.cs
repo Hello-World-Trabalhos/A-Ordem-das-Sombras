@@ -5,23 +5,27 @@ public class MainMenu : MonoBehaviour
 
     private GameObject mainMenu;
     private GameObject scenarioGenerationPanel;
+    private GameObject aboutPanel;
 
     void Start()
     {
-        mainMenu = GameObject.Find("MainMenu").gameObject;
-        scenarioGenerationPanel = GameObject.Find("Canvas").transform.Find("ScenarioGenerationPanel").gameObject;
+        GameObject canvas = GameObject.Find("Canvas").gameObject;
+
+        mainMenu = canvas.transform.Find("MainMenu").gameObject;
+        scenarioGenerationPanel = canvas.transform.Find("ScenarioGenerationPanel").gameObject;
+        aboutPanel = canvas.transform.Find("AboutPanel").gameObject;
     }
 
-    public void OpenScenarioGenerationPanel()
+    public void ToggleScenarioGenerationPanel()
     {
-        mainMenu.SetActive(false);
-        scenarioGenerationPanel.SetActive(true);
+        mainMenu.SetActive(!mainMenu.activeSelf);
+        scenarioGenerationPanel.SetActive(!scenarioGenerationPanel.activeSelf);
     }
 
-    public void CloseScenarioGenerationPanel()
+    public void ToggleAboutPanel()
     {
-        scenarioGenerationPanel.SetActive(false);
-        mainMenu.SetActive(true);
+        mainMenu.SetActive(!mainMenu.activeSelf);
+        aboutPanel.SetActive(!aboutPanel.activeSelf);
     }
 
     public void ExitGame()
