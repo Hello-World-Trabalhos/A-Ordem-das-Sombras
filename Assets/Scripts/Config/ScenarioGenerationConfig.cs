@@ -48,10 +48,7 @@ public class ScenarioGenerationConfig
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION))
         {
-            PlayerPrefs.SetString(
-                ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION, 
-                ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION_DEFAULT_VALUE.ToString()
-            );
+            EnableObstaclesGeneration(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION_DEFAULT_VALUE);
         }
 
         return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_OBSTACLES_GENERATION));
@@ -61,10 +58,7 @@ public class ScenarioGenerationConfig
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION))
         {
-            PlayerPrefs.SetString(
-                ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION,
-                ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION_DEFAULT_VALUE.ToString()
-            );
+            EnableEnemiesGeneration(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION_DEFAULT_VALUE);
         }
 
         return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_ENEMIES_GENERATION));
@@ -74,10 +68,7 @@ public class ScenarioGenerationConfig
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION))
         {
-            PlayerPrefs.SetString(
-                ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION,
-                ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION_DEFAULT_VALUE.ToString()
-            );
+            EnablePlayerGeneration(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION_DEFAULT_VALUE);
         }
 
         return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_PLAYER_GENERATION));
@@ -87,10 +78,7 @@ public class ScenarioGenerationConfig
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION))
         {
-            PlayerPrefs.SetString(
-                ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION,
-                ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION_DEFAULT_VALUE.ToString()
-            );
+            EnableBossGeneration(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION_DEFAULT_VALUE);
         }
 
         return bool.Parse(PlayerPrefs.GetString(ScenarioGeneratiorViewerConstants.ENABLE_BOSS_GENERATION));
@@ -100,10 +88,7 @@ public class ScenarioGenerationConfig
     {
         if (!PlayerPrefs.HasKey(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT))
         {
-            PlayerPrefs.SetInt(
-                ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT,
-                ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT_DEFAULT_VALUE
-            );
+            EnemiesAmmount(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT_DEFAULT_VALUE);
         }
 
         return PlayerPrefs.GetInt(ScenarioGeneratiorViewerConstants.ENEMIES_AMOUNT);
