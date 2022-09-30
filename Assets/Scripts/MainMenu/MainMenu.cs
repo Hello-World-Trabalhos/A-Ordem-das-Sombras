@@ -46,16 +46,22 @@ public class MainMenu : MonoBehaviour
     {
         Toggle musicToggle = settingsPanel.transform.Find("MusicToggle").transform.Find("Toggle").GetComponent<Toggle>();
         Slider musicVolume = settingsPanel.transform.Find("MusicVolumeSlider").transform.Find("Slider").GetComponent<Slider>();
-        // chamar o AudioConfigSaver (instância)
-        // chamar o método dele para salvar configuracoes
+
+        AudioConfig audioConfig = new AudioConfig();
+
+        audioConfig.EnableMusic(musicToggle.isOn);
+        audioConfig.SetMusicVolume(musicVolume.value);
     }
 
     private void SetupConfigs()
     {
         Toggle musicToggle = settingsPanel.transform.Find("MusicToggle").transform.Find("Toggle").GetComponent<Toggle>();
         Slider musicVolume = settingsPanel.transform.Find("MusicVolumeSlider").transform.Find("Slider").GetComponent<Slider>();
-        // buscar os valores do AudioConfig
-        // atribuir aos itens referenciados nas variáveis acima
+
+        AudioConfig audioConfig = new AudioConfig();
+        
+        musicToggle.isOn = audioConfig.IsMusicEnabled();
+        musicVolume.value = audioConfig.GetMusicVolume();
     }
 
     public void ExitGame()
