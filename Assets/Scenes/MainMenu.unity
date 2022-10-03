@@ -2857,7 +2857,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1.2
-  m_Text: "AQUI FICAR\xC1 O TEXTO DE AGRADECIMENTOS, PENSAR COM O PESSOAL"
+  m_Text: "Agradecemos a todos que participaram direta e indiretamente desse projeto,
+    sem todo o apoio n\xE3o seria poss\xEDvel chegar nos estado que ele se encontra
+    nesse momento! :)"
 --- !u!222 &1003604895
 CanvasRenderer:
   m_ObjectHideFlags: 0
