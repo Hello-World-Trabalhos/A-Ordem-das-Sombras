@@ -2,32 +2,33 @@ using UnityEngine;
 
 public class Hud : MonoBehaviour
 {
-
-    private const byte HUD_CHILD_INDEX = 0;
-    private const byte PAUSE_MENU_CHILD_INDEX = 1;
+    private readonly GameStateManager gameStateManager = new GameStateManager();
     private GameObject hud;
     private GameObject pauseMenu;
 
     void Start()
     {
         Transform canvasTransform = GameObject.Find("Canvas").transform;
-        hud = canvasTransform.GetChild(HUD_CHILD_INDEX).gameObject;
-        pauseMenu = canvasTransform.GetChild(PAUSE_MENU_CHILD_INDEX).gameObject;
+        hud = canvasTransform.Find("Hud").gameObject;
+        pauseMenu = canvasTransform.Find("PauseMenu").gameObject;
     }
 
     public void LoadMainMenu()
     {
+        gameStateManager.ResumeGame();
         SceneLoader.LoadMainMenu();
     }
 
     public void OpenPauseMenu()
     {
+        gameStateManager.PauseGame();
         pauseMenu.SetActive(true);
         hud.SetActive(false);
     }
 
     public void ClosePauseMenu()
     {
+        gameStateManager.ResumeGame();
         pauseMenu.SetActive(false);
         hud.SetActive(true);
     }
