@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ActualScenarioConfigSaver
+public class ScenarioGenerationViewerConfigSaver
 {
     public void SaveValuesFromActualScene()
     {

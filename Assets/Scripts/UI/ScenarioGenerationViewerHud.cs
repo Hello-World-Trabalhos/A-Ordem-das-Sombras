@@ -78,7 +78,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
     {
         GameObject.Find("ScenarioGeneratorSavingChangesButton").GetComponent<Button>().interactable = false;
 
-        new ActualScenarioConfigSaver().SaveValuesFromActualScene();
+        new ScenarioGenerationViewerConfigSaver().SaveValuesFromActualScene();
         GenerateNewScenario();
     }
 
