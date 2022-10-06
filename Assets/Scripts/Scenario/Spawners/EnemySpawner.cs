@@ -65,7 +65,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject[] choosedSpawns = new GameObject[enemiesPerRoom];
         List<int> possibleIndex = new List<int>();
 
-        for (int i = 0; i < enemiesPerRoom; i++)
+        for (int i = 0; i < enemiesSpawns.Length; i++)
         {
             possibleIndex.Add(i);
         }
