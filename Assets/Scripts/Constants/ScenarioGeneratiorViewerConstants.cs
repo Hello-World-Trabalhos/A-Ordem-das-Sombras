@@ -17,11 +17,11 @@ public class ScenarioGeneratiorViewerConstants
     public const int MIN_ENEMIES_AMMOUNT = 0;
     public const int MAX_ENEMIES_AMMOUNT = 4;
 
-    public const string ENABLE_OBSTACLES_GENERATION = "ENABLE_OBSTACLES_GENERATION";
-    public const string ENABLE_ENEMIES_GENERATION = "ENABLE_ENEMIES_GENERATION";
-    public const string ENABLE_PLAYER_GENERATION = "ENABLE_PLAYER_GENERATION";
-    public const string ENABLE_BOSS_GENERATION = "ENABLE_BOSS_GENERATION";
-    public const string ENEMIES_AMOUNT = "ENEMIES_AMOUNT";
+    public const string ENABLE_OBSTACLES_GENERATION_KEY = "ENABLE_OBSTACLES_GENERATION";
+    public const string ENABLE_ENEMIES_GENERATION_KEY = "ENABLE_ENEMIES_GENERATION";
+    public const string ENABLE_PLAYER_GENERATION_KEY = "ENABLE_PLAYER_GENERATION";
+    public const string ENABLE_BOSS_GENERATION_KEY = "ENABLE_BOSS_GENERATION";
+    public const string ENEMIES_AMOUNT_KEY = "ENEMIES_AMOUNT";
 
     public const bool ENABLE_OBSTACLES_GENERATION_DEFAULT_VALUE = true;
     public const bool ENABLE_ENEMIES_GENERATION_DEFAULT_VALUE = true;
