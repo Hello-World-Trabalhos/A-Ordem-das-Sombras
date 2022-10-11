@@ -17,6 +17,7 @@ TagManager:
   - ObstacleSpawn
   - InteriorTemplate
   - PlayerSpawn
+  - ClosedRoom
   layers:
   - Default
   - TransparentFX

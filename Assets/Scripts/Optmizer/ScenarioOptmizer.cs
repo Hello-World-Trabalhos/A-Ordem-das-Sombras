@@ -33,7 +33,30 @@ public class ScenarioOptmizer
 
     private void DestroyClosedRoomsWithEqualPositions()
     {
-        // Implementar ...
+        GameObject[] closedRooms = GameObject.FindGameObjectsWithTag("ClosedRoom");
+        List<GameObject> closedRoomsToDestroy = new List<GameObject>();
+
+        for (int i = 0; i < closedRooms.Length; i++)
+        {
+            for (int j = i + 1; j < closedRooms.Length; j++)
+            {
+                if (closedRooms[i].transform.position == closedRooms[j].transform.position)
+                {
+                    if (!closedRoomsToDestroy.Contains(closedRooms[j]))
+                    {
+                        closedRoomsToDestroy.Add(closedRooms[j]);
+                    }
+                }
+            }
+        }
+
+        closedRoomsToDestroy.ForEach(closedRoom =>
+        {
+            if (closedRoom != null)
+            {
+                GameObject.Destroy(closedRoom);
+            }
+        });
     }
 
     private void DestroyProceduralScenarioGenerationCreationItems()
