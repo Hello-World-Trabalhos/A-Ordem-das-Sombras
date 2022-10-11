@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Player))]
 public class PlayerController : MonoBehaviour
 {
+    public Player player;
     public Animator playerAnimator;
     FixedJoystick fixedJoystick;
     float input_x = 0;
     float input_y = 0;
-    public float speed = 2.5f;
+    //public float speed = 2.5f;
     bool isWalking = false;
     SpriteRenderer sr;
     Rigidbody2D rb2;
@@ -23,6 +25,7 @@ public class PlayerController : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
 
         rb2 = GetComponent<Rigidbody2D>();
+        player = GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -79,6 +82,6 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb2.MovePosition(rb2.position + movement * speed * Time.fixedDeltaTime);
+        rb2.MovePosition(rb2.position + movement * player.entity.speed * Time.fixedDeltaTime);
     }
 }

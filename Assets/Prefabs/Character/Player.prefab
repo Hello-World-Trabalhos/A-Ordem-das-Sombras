@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5542771433806368402}
   - component: {fileID: 308594033130319971}
   - component: {fileID: 2876272854591774117}
+  - component: {fileID: 5433042151222174659}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -117,8 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c383548cff3938040836eeac84d3897d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   playerAnimator: {fileID: 5542771433806368401}
-  speed: 2.5
 --- !u!61 &308594033130319971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -166,3 +167,36 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &5433042151222174659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542771433806368494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02b198211af2dc41878df4b127ca8b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entity:
+    name: Alucard
+    level: 1
+    currentHealth: 100
+    maxHealth: 100
+    currentXP: 1
+    maxXP: 91
+    strength: 1
+    resistence: 1
+    damage: 1
+    defence: 1
+    speed: 3
+    attackDistance: 0.5
+    attackTime: 1
+    coolDown: 2
+    inCombat: 0
+    target: {fileID: 0}
+    combatCoroutine: 0
+    dead: 0
+  health: {fileID: 0}
+  experience: {fileID: 0}

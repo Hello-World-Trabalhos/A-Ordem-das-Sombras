@@ -18,6 +18,7 @@ TagManager:
   - InteriorTemplate
   - PlayerSpawn
   - ClosedRoom
+  - Enemy
   layers:
   - Default
   - TransparentFX
