@@ -28,7 +28,7 @@ public class Entity
 
     [Header("Combat")]
     public float attackDistance = 0.5f;
-    public float attackTime = 1f;
+    public float attackTimer = 1f;
     public float coolDown = 2f;
     public bool inCombat = false;
     public GameObject target;

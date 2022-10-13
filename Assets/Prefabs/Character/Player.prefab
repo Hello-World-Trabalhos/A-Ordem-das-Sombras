@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 308594033130319971}
   - component: {fileID: 2876272854591774117}
   - component: {fileID: 5433042151222174659}
+  - component: {fileID: 2846232771842719023}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -120,6 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   playerAnimator: {fileID: 5542771433806368401}
+  btnAttack: {fileID: 0}
 --- !u!61 &308594033130319971
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -192,11 +194,33 @@ MonoBehaviour:
     defence: 1
     speed: 3
     attackDistance: 0.5
-    attackTime: 1
+    attackTimer: 1
     coolDown: 2
     inCombat: 0
     target: {fileID: 0}
     combatCoroutine: 0
     dead: 0
-  health: {fileID: 0}
-  experience: {fileID: 0}
+    entityAudio: {fileID: 0}
+  currentExp: 0
+  expBase: 0
+  expLeft: 0
+  expMod: 0
+  regenerationFx: {fileID: 0}
+  regenerationSound: {fileID: 0}
+  btnPotion: {fileID: 0}
+--- !u!70 &2846232771842719023
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542771433806368494}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0

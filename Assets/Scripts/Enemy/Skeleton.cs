@@ -6,10 +6,11 @@ using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class Skull : MonoBehaviour
+
+public class Skeleton : MonoBehaviour
 {
     [Header("Controller")]
-    public Entity entity;
+    public Entity entity = new Entity();
 
     [Header("Patrol")]
     public Transform[] waypointList;
