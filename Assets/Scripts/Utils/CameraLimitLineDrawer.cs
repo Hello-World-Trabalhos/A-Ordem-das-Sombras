@@ -13,11 +13,11 @@ public class CameraLimitLineDrawer : MonoBehaviour
     private void SetUpCameraLimitLine()
     {
         Vector3[] positions = new Vector3[] {
-            new Vector3(ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS, 0),
-            new Vector3(ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS, 0),
-            new Vector3(ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS, 0),
-            new Vector3(ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS, 0),
-            new Vector3(ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS, 0)
+            new Vector3(ScenarioGenerationViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MAX_Y_CAMERA_AXIS, 0),
+            new Vector3(ScenarioGenerationViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MIN_Y_CAMERA_AXIS, 0),
+            new Vector3(ScenarioGenerationViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MIN_Y_CAMERA_AXIS, 0),
+            new Vector3(ScenarioGenerationViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MAX_Y_CAMERA_AXIS, 0),
+            new Vector3(ScenarioGenerationViewerConstants.MAX_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MAX_Y_CAMERA_AXIS, 0)
         };
 
         LineRenderer lineRenderer = gameObject.GetComponent<LineRenderer>();

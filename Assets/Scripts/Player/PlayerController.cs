@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         Vector3 newCamaraPosition = new Vector3();
         newCamaraPosition.x = gameObject.transform.position.x;
         newCamaraPosition.y = gameObject.transform.position.y;
-        newCamaraPosition.z = ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS;
+        newCamaraPosition.z = ScenarioGenerationViewerConstants.Z_CAMERA_AXIS;
         Camera.main.transform.position = newCamaraPosition;
         Camera.main.transform.SetParent(gameObject.transform);
     }
@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     void MovePlayer()
     {
-        //pegando os comandos de movimentação pelo teclado
+        //pegando os comandos de movimentaï¿½ï¿½o pelo teclado
         //input_x = Input.GetAxisRaw("Horizontal");
         //input_y = Input.GetAxisRaw("Vertical");
 
@@ -73,7 +73,7 @@ public class PlayerController : MonoBehaviour
             //var move = new Vector3(input_x, input_y, 0).normalized;
             //transform.position += move * speed * Time.deltaTime;
 
-            //movendo a animação de run_right para a run_left
+            //movendo a animaï¿½ï¿½o de run_right para a run_left
             if (input_x < 0)
             {
                 sr.flipX = true;
@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
             {
                 sr.flipX = false;
             }
-            //controlhando as animações
+            //controlhando as animaï¿½ï¿½es
             playerAnimator.SetFloat("input_x", input_x);
             playerAnimator.SetFloat("input_y", input_y);
         }

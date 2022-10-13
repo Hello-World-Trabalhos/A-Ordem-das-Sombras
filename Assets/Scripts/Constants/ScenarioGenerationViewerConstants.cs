@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScenarioGeneratiorViewerConstants
+public class ScenarioGenerationViewerConstants
 {
     public const float MAX_X_CAMERA_AXIS = 150;
     public const float MAX_Y_CAMERA_AXIS = 150;
