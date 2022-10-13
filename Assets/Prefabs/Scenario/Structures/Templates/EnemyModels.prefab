@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyModels:
-  - {fileID: 783684278008998804, guid: 818fa0552b5158d49bfe48ac370167f4, type: 3}
-  - {fileID: 6416209388971078540, guid: ae0537806d9175e4cabae0009fc0fd48, type: 3}
+  - {fileID: 5542771433806368494, guid: 8c4b1a0f189cb6c449f5f3851330f9aa, type: 3}
+  - {fileID: 5542771433806368494, guid: 6eeec700eb2be7945bf6ae80033a92fa, type: 3}
