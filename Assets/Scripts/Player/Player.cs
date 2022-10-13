@@ -6,35 +6,72 @@ public class Player : MonoBehaviour
 {
     public Entity entity;
 
-    [Header("Player UI")]
+    //[Header("Player UI")]
+    //public Slider health;
+    //public Slider experience;
 
-    public Slider health;
-    public Slider experience;
+    private Slider hpSliper;
+    private Slider xpSliper;
 
     [Header("Exp")]
-    public int exp;
+    public int currentExp;
     public int expBase;
     public int expLeft;
     public float expMod;
-    public GameObject levelUpFx;
-    public AudioClip levelUpSound;
+    public GameObject regenerationFx;
+    public AudioClip regenerationSound;
+    public Button btnPotion;
 
     void Start()
     {
+        GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")
+            .transform.Find("Hud").gameObject;
+        btnPotion = hud.transform.Find("Potion").GetComponent<Button>();
+        btnPotion.onClick.AddListener(() => Regeneration());
+
+        hpSliper = hud.transform.Find("HealthBar").transform.Find("HPSlider").GetComponent<Slider>();
+        xpSliper = hud.transform.Find("LevelBar").transform.Find("XPSlider").GetComponent<Slider>();
+
         entity.currentHealth = entity.maxHealth;
-        health.maxValue = entity.maxHealth;
-        health.value = health.maxValue;
+        hpSliper.maxValue = entity.maxHealth;
+        hpSliper.value = hpSliper.maxValue;
 
         entity.currentXP = 1;
-        experience.maxValue = entity.maxXP;
-        experience.value = 1 ;
+        xpSliper.maxValue = entity.maxXP;
+        xpSliper.value = 1 ;
     }
 
     private void Update()
     {
-        health.value = entity.currentHealth;
+        hpSliper.value = entity.currentHealth;
 
         if (Input.GetKeyDown(KeyCode.Space))
             entity.currentHealth -= 10;
+    }
+
+    public void GainExp(int amount)
+    {
+        currentExp += amount;
+        if (currentExp >= expLeft)
+        {
+            LevelUp();
+        }
+    }
+
+    public void LevelUp()
+    {
+        currentExp -= expLeft;
+        entity.level++;
+
+        float newExp = Mathf.Pow((float)expMod, entity.level);
+        expLeft = (int)Mathf.Floor((float)expBase * newExp);
+    }
+
+    public void Regeneration()
+    {
+        entity.currentHealth = entity.maxHealth;
+
+        //entity.entityAudio.PlayOneShot(regenerationSound);
+        //Instantiate(regenerationFx, this.gameObject.transform); //.Find("RegenerationSound")
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Player))]
@@ -16,10 +17,18 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sr;
     Rigidbody2D rb2;
     Vector2 movement = Vector2.zero;
+    public Button btnAttack;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")
+            .transform.Find("Hud").gameObject;
+
+        btnAttack = hud.transform.Find("Attack").GetComponent<Button>();
+
+        btnAttack.onClick.AddListener(() => AtackPlayer());
+
         isWalking = false;
         fixedJoystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
         sr = GetComponent<SpriteRenderer>();
@@ -35,7 +44,7 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
 
-        AtackPlayer();
+        //AtackPlayer();
     }
 
     void MovePlayer()
@@ -72,12 +81,9 @@ public class PlayerController : MonoBehaviour
         playerAnimator.SetBool("isWalking", isWalking);
     }
 
-    void AtackPlayer()
+    public void AtackPlayer()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            playerAnimator.SetTrigger("attack");
-        }
+        playerAnimator.SetTrigger("attack");
     }
 
     private void FixedUpdate()

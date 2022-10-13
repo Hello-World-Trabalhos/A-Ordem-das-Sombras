@@ -34,4 +34,7 @@ public class Entity
     public GameObject target;
     public bool combatCoroutine = false;
     public bool dead = false;
+
+    [Header("Component")]
+    public AudioSource entityAudio;
 }
