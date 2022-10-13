@@ -88,28 +88,28 @@ public class Skeleton : MonoBehaviour
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collider)
-    //{
-    //    if (collider.tag == "Player" && !entity.dead)
-    //    {
-    //        entity.inCombat = true;
-    //        entity.target = collider.gameObject;
-    //        entity.target.GetComponent<BoxCollider2D>().isTrigger = true;
-    //    }
-    //}
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if (collider.tag == "Player" && !entity.dead)
+        {
+            entity.inCombat = true;
+            entity.target = collider.gameObject;
+            //entity.target.GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+    }
 
-    //private void OnTriggerExit2D(Collider2D collider)
-    //{
-    //    if (collider.tag == "Player")
-    //    {
-    //        entity.inCombat = false;
-    //        if (entity.target)
-    //        {
-    //            entity.target.GetComponent<BoxCollider2D>().isTrigger = false;
-    //            entity.target = null;
-    //        }
-    //    }
-    //}
+    private void OnTriggerExit2D(Collider2D collider)
+    {
+        if (collider.tag == "Player")
+        {
+            entity.inCombat = false;
+            if (entity.target)
+            {
+                //entity.target.GetComponent<BoxCollider2D>().isTrigger = false;
+                entity.target = null;
+            }
+        }
+    }
 
     void Patrol()
     {
