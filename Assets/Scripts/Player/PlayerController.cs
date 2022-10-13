@@ -35,6 +35,14 @@ public class PlayerController : MonoBehaviour
 
         rb2 = GetComponent<Rigidbody2D>();
         player = GetComponent<Player>();
+
+        //camera
+        Vector3 newCamaraPosition = new Vector3();
+        newCamaraPosition.x = gameObject.transform.position.x;
+        newCamaraPosition.y = gameObject.transform.position.y;
+        newCamaraPosition.z = ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS;
+        Camera.main.transform.position = newCamaraPosition;
+        Camera.main.transform.SetParent(gameObject.transform);
     }
 
     // Update is called once per frame
@@ -84,10 +92,49 @@ public class PlayerController : MonoBehaviour
     public void AtackPlayer()
     {
         playerAnimator.SetTrigger("attack");
+        player.entity.attackTimer = player.entity.coolDown;
+        Attack();
+
     }
 
     private void FixedUpdate()
     {
         rb2.MovePosition(rb2.position + movement * player.entity.speed * Time.fixedDeltaTime);
+    }
+
+    //private void OnTriggerExit2D(Collider2D collider)
+    //{
+    //    if (collider.transform.tag == "Enemy")
+    //    {
+    //        player.entity.target = null;
+    //    }
+    //}
+    void Attack()
+    {
+        if (player.entity.target == null)
+            return;
+
+        Skeleton skeleton = player.entity.target.GetComponent<Skeleton>();
+
+        if (skeleton.entity.dead)
+        {
+            player.entity.target = null;
+            return;
+        }
+
+        float distance = Vector2.Distance(transform.position, player.entity.target.transform.position);
+
+        if (distance <= player.entity.attackDistance)
+        {
+            int dmg = player.entity.damage;
+            int enemyDef = player.entity.defence;
+            int result = dmg - enemyDef;
+
+            if (result < 0)
+                result = 0;
+
+            skeleton.entity.currentHealth -= result;
+            skeleton.entity.target = this.gameObject;
+        }
     }
 }

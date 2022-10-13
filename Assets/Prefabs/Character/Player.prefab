@@ -190,8 +190,8 @@ MonoBehaviour:
     maxXP: 91
     strength: 1
     resistence: 1
-    damage: 1
-    defence: 1
+    damage: 50
+    defence: 0
     speed: 3
     attackDistance: 0.5
     attackTimer: 1
