@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
 
+    private static readonly RoomSpawnChecker roomSpawnChecker = new RoomSpawnChecker();
+    private static Dictionary<Direction, GameObject[]> directionsRoomTemplates;
     private static RoomTemplates roomTemplates;
     private static RoomSpawnWait roomSpawnWait;
 
@@ -14,9 +17,14 @@ public class RoomSpawner : MonoBehaviour
 
     void Start()
     {
-        if (roomTemplates == null)
+        if (roomTemplates == null || directionsRoomTemplates == null)
         {
             roomTemplates = GameObject.FindGameObjectWithTag("RoomTemplates").GetComponent<RoomTemplates>();
+            directionsRoomTemplates = new Dictionary<Direction, GameObject[]>();
+            directionsRoomTemplates.Add(Direction.TOP, roomTemplates.topRooms);
+            directionsRoomTemplates.Add(Direction.LEFT, roomTemplates.leftRooms);
+            directionsRoomTemplates.Add(Direction.BOTTOM, roomTemplates.bottomRooms);
+            directionsRoomTemplates.Add(Direction.RIGHT, roomTemplates.rightRooms);
         }
 
         if (roomSpawnWait == null)
@@ -37,47 +45,24 @@ public class RoomSpawner : MonoBehaviour
 
         if (!isSpawned)
         {
-            int randomIndex;
-            GameObject choosedRoomTemplate = null;
-
-            // adicionar aqui o SpawnChecker, irá retornar uma estrutura de dados informando quais lados não podem
-            // estar abertos, e então, filtrar isso nos respectivos arrays
-
-
-            switch (roomConnectedDoorDirection)
+            List<Direction> blockedDirections = roomSpawnChecker.GetBlockedDirections(gameObject);
+            List<GameObject> choosedRoomTemplateArrayCopiedAsList = directionsRoomTemplates[roomConnectedDoorDirection].ToList();
+            List<GameObject> choosedRoomtemplatesListFiltered = choosedRoomTemplateArrayCopiedAsList.FindAll(roomTemplate =>
             {
-                case Direction.TOP:
-                    // filtragem do array
-                    // cópia do array aqui
-                    randomIndex = Random.Range(0, roomTemplates.topRooms.Length);
-                    // usar cópia do array aqui
-                    choosedRoomTemplate = roomTemplates.topRooms[randomIndex];
-                    break;
+                OpenedDirectionsData roomOpenedDirectionsData = roomTemplate.transform.Find("Data").GetComponent<OpenedDirectionsData>();
 
-                case Direction.LEFT:
-                    // filtragem do array
-                    // cópia do array aqui
-                    randomIndex = Random.Range(0, roomTemplates.leftRooms.Length);
-                    // usar cópia do array aqui
-                    choosedRoomTemplate = roomTemplates.leftRooms[randomIndex];
-                    break;
+                foreach (Direction direction in roomOpenedDirectionsData.openedDirections)
+                {
+                    if (blockedDirections.Contains(direction)) {
+                        return false;
+                    }
+                }
 
-                case Direction.BOTTOM:
-                    // filtragem do array
-                    // cópia do array aqui
-                    randomIndex = Random.Range(0, roomTemplates.bottomRooms.Length);
-                    // usar cópia do array aqui
-                    choosedRoomTemplate = roomTemplates.bottomRooms[randomIndex];
-                    break;
+                return true;
+            });
 
-                case Direction.RIGHT:
-                    // filtragem do array
-                    // cópia do array aqui
-                    randomIndex = Random.Range(0, roomTemplates.rightRooms.Length);
-                    // usar cópia do array aqui
-                    choosedRoomTemplate = roomTemplates.rightRooms[randomIndex];
-                    break;
-            }
+            int randomIndex = Random.Range(0, choosedRoomtemplatesListFiltered.Count);
+            GameObject choosedRoomTemplate = choosedRoomtemplatesListFiltered[randomIndex];
 
             float x = transform.position.x + ScenarioConstants.X_SPAWN_MARGIN_OF_ERROR;
             float y = transform.position.y + ScenarioConstants.Y_SPAWN_MARGIN_OF_ERROR;
@@ -100,8 +85,13 @@ public class RoomSpawner : MonoBehaviour
             if (!other.GetComponent<RoomSpawner>().isSpawned && !isSpawned)
             {
                 Instantiate(roomTemplates.closedRoom, transform.position, Quaternion.identity);
+                // pega posição da colisão
+                // destroi os spawn points se houver
+                // faz raycast para ver quais os lados de aberturas necessários para conectar as rooms
+                // instância essa room
             }
 
+            // destruicao dos spawn points
             Destroy(gameObject);
         }
     }

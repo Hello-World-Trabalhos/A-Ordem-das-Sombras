@@ -4,12 +4,29 @@ using UnityEngine;
 
 public class RoomSpawnChecker
 {
-    public void GetRoomsDoorsOpeningDirectionsBlocked(GameObject spawnPoint)
+    private const float RAY_CAST_DISTANCE = 6.5f;
+    public List<Direction> GetBlockedDirections(GameObject spawnPoint)
     {
-        // OBS: o RoomSpawnChecker cria os objetos na hora, coleta o que precisa retorna o valor e se destroy depois
-        // criar o raycast para cada direção (UP, DOWN, LEFT, RIGHT)
-        // ver se ele bate em uma parede, dentro dos limites de distância, para não pegar a parede do outro lado do cenário
-        // pegar todas as direcoes que bateram em paredes
-        // retornar em um array ou lista
+        Vector2 positionUp = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y + 1);
+        Vector2 positionLeft = new Vector2(spawnPoint.transform.position.x - 1, spawnPoint.transform.position.y);
+        Vector2 positionDown = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y - 1);
+        Vector2 positionRight = new Vector2(spawnPoint.transform.position.x + 1, spawnPoint.transform.position.y);
+
+        List<Direction> directionsList = new List<Direction>();
+        Dictionary<Direction, RaycastHit2D> hits = new Dictionary<Direction, RaycastHit2D>();
+        hits.Add(Direction.TOP, Physics2D.Raycast(positionUp, Vector2.up, RAY_CAST_DISTANCE));
+        hits.Add(Direction.LEFT, Physics2D.Raycast(positionLeft, Vector2.left, RAY_CAST_DISTANCE));
+        hits.Add(Direction.BOTTOM, Physics2D.Raycast(positionDown, Vector2.down, RAY_CAST_DISTANCE));
+        hits.Add(Direction.RIGHT, Physics2D.Raycast(positionRight, Vector2.right, RAY_CAST_DISTANCE));
+
+        foreach (KeyValuePair<Direction, RaycastHit2D> hit in hits)
+        {
+            if (hit.Value.collider != null && hit.Value.collider.tag == "Wall")
+            {
+                directionsList.Add(hit.Key);
+            }
+        }
+
+        return directionsList;
     }
 }
