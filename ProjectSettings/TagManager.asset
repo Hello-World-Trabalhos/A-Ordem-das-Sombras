@@ -19,6 +19,7 @@ TagManager:
   - PlayerSpawn
   - ClosedRoom
   - Enemy
+  - RoomData
   layers:
   - Default
   - TransparentFX

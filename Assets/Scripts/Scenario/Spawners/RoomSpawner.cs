@@ -6,11 +6,6 @@ using UnityEngine;
 public class RoomSpawner : MonoBehaviour
 {
 
-    public enum Direction
-    {
-        TOP, LEFT, BOTTOM, RIGHT
-    }
-
     private static RoomTemplates roomTemplates;
     private static RoomSpawnWait roomSpawnWait;
 
@@ -45,25 +40,41 @@ public class RoomSpawner : MonoBehaviour
             int randomIndex;
             GameObject choosedRoomTemplate = null;
 
+            // adicionar aqui o SpawnChecker, irá retornar uma estrutura de dados informando quais lados não podem
+            // estar abertos, e então, filtrar isso nos respectivos arrays
+
+
             switch (roomConnectedDoorDirection)
             {
                 case Direction.TOP:
+                    // filtragem do array
+                    // cópia do array aqui
                     randomIndex = Random.Range(0, roomTemplates.topRooms.Length);
+                    // usar cópia do array aqui
                     choosedRoomTemplate = roomTemplates.topRooms[randomIndex];
                     break;
 
                 case Direction.LEFT:
+                    // filtragem do array
+                    // cópia do array aqui
                     randomIndex = Random.Range(0, roomTemplates.leftRooms.Length);
+                    // usar cópia do array aqui
                     choosedRoomTemplate = roomTemplates.leftRooms[randomIndex];
                     break;
 
                 case Direction.BOTTOM:
+                    // filtragem do array
+                    // cópia do array aqui
                     randomIndex = Random.Range(0, roomTemplates.bottomRooms.Length);
+                    // usar cópia do array aqui
                     choosedRoomTemplate = roomTemplates.bottomRooms[randomIndex];
                     break;
 
                 case Direction.RIGHT:
+                    // filtragem do array
+                    // cópia do array aqui
                     randomIndex = Random.Range(0, roomTemplates.rightRooms.Length);
+                    // usar cópia do array aqui
                     choosedRoomTemplate = roomTemplates.rightRooms[randomIndex];
                     break;
             }

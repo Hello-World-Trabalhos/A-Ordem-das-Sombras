@@ -1336,6 +1336,50 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!1 &2790567673049806134
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5012868101322856677}
+  - component: {fileID: 2927732539237651848}
+  m_Layer: 0
+  m_Name: Data
+  m_TagString: RoomData
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5012868101322856677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790567673049806134}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3525478601347732706}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2927732539237651848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790567673049806134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1ee43fec2a454b48b20caff75da2c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openedDirections: 00000000
 --- !u!1 &2949098375796130072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1712,7 +1756,7 @@ Transform:
   - {fileID: 3525478601198704772}
   - {fileID: 3525478600385328058}
   m_Father: {fileID: 3525478601347732706}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3525478600915701282
 GameObject:
@@ -1744,7 +1788,7 @@ Transform:
   - {fileID: 8011248452701291443}
   - {fileID: 1964120961935526639}
   m_Father: {fileID: 3525478601347732706}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3525478601198704775
 GameObject:
@@ -1853,6 +1897,7 @@ Transform:
   m_LocalPosition: {x: 85.5, y: 25.5, z: -15.813998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 5012868101322856677}
   - {fileID: 3525478600740846343}
   - {fileID: 3525478600915701283}
   - {fileID: 8784995911387057935}
@@ -2124,7 +2169,7 @@ Transform:
   - {fileID: 3263278224299086033}
   - {fileID: 4170692905390294023}
   m_Father: {fileID: 3525478601347732706}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!156049354 &5970172985008462552
 Grid:
