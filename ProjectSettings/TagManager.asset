@@ -20,6 +20,7 @@ TagManager:
   - ClosedRoom
   - Enemy
   - RoomData
+  - Passage
   layers:
   - Default
   - TransparentFX
