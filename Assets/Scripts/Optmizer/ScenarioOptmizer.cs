@@ -7,6 +7,7 @@ public class ScenarioOptmizer
     {
         DestroyInteriorTemplates();
         DestroyRoomsSpawnPoints();
+        DestroyRoomsDataObject();
         DestroyClosedRoomsWithEqualPositions();
         DestroyProceduralScenarioGenerationCreationItems();
     }
@@ -31,9 +32,25 @@ public class ScenarioOptmizer
         }
     }
 
+    private void DestroyRoomsDataObject()
+    {
+        GameObject[] roomsDataObjects = GameObject.FindGameObjectsWithTag("RoomData");
+
+        for (int i = 0; i < roomsDataObjects.Length; i++)
+        {
+            GameObject.Destroy(roomsDataObjects[i].gameObject);
+        }
+    }
+
     private void DestroyClosedRoomsWithEqualPositions()
     {
         GameObject[] closedRooms = GameObject.FindGameObjectsWithTag("ClosedRoom");
+
+        if (closedRooms.Length == 0)
+        {
+            return;
+        }
+
         List<GameObject> closedRoomsToDestroy = new List<GameObject>();
 
         for (int i = 0; i < closedRooms.Length; i++)

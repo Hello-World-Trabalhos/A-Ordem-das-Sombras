@@ -29,4 +29,12 @@ public class RoomSpawnChecker
 
         return directionsList;
     }
+
+    public List<Direction> GetPassagesDirections(GameObject spawnPoint)
+    {
+        // criar posições semelhante ao método acima
+        // listar todos os lugares que tem colisões com um ponto chamado passage;
+        // mudar o retorno aqui
+        return new List<Direction>();
+    }
 }
