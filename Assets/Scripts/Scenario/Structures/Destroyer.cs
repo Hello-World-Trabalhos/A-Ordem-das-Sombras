@@ -17,7 +17,9 @@ public class Destroyer : MonoBehaviour
                 Destroy(other.transform.parent.gameObject);
                 break;
 
-            // talvez novo case, caso for outro Destroyer, destrói a outra room
+            case "Destroyer":
+                Destroy(other.transform.parent.parent.gameObject);
+                break;
         }
     }
 }

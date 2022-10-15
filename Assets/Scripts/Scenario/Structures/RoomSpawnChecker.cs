@@ -5,12 +5,22 @@ using UnityEngine;
 public class RoomSpawnChecker
 {
     private const float RAY_CAST_DISTANCE = 6.5f;
-    public List<Direction> GetBlockedDirections(GameObject spawnPoint)
+    public List<Direction> GetBlockedDirections(Vector3 originPosition)
     {
-        Vector2 positionUp = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y + 1);
-        Vector2 positionLeft = new Vector2(spawnPoint.transform.position.x - 1, spawnPoint.transform.position.y);
-        Vector2 positionDown = new Vector2(spawnPoint.transform.position.x, spawnPoint.transform.position.y - 1);
-        Vector2 positionRight = new Vector2(spawnPoint.transform.position.x + 1, spawnPoint.transform.position.y);
+        return CheckWhichDirectionsRayCastCollideByTag(originPosition, "Wall");
+    }
+
+    public List<Direction> GetPassagesDirections(Vector3 originPosition)
+    {
+        return CheckWhichDirectionsRayCastCollideByTag(originPosition, "Passage");
+    }
+
+    private List<Direction> CheckWhichDirectionsRayCastCollideByTag(Vector3 originPosition, string tag)
+    {
+        Vector2 positionUp = new Vector2(originPosition.x, originPosition.y + 1);
+        Vector2 positionLeft = new Vector2(originPosition.x - 1, originPosition.y);
+        Vector2 positionDown = new Vector2(originPosition.x, originPosition.y - 1);
+        Vector2 positionRight = new Vector2(originPosition.x + 1, originPosition.y);
 
         List<Direction> directionsList = new List<Direction>();
         Dictionary<Direction, RaycastHit2D> hits = new Dictionary<Direction, RaycastHit2D>();
@@ -21,20 +31,12 @@ public class RoomSpawnChecker
 
         foreach (KeyValuePair<Direction, RaycastHit2D> hit in hits)
         {
-            if (hit.Value.collider != null && hit.Value.collider.tag == "Wall")
+            if (hit.Value.collider != null && hit.Value.collider.tag == tag)
             {
                 directionsList.Add(hit.Key);
             }
         }
 
         return directionsList;
-    }
-
-    public List<Direction> GetPassagesDirections(GameObject spawnPoint)
-    {
-        // criar posições semelhante ao método acima
-        // listar todos os lugares que tem colisões com um ponto chamado passage;
-        // mudar o retorno aqui
-        return new List<Direction>();
     }
 }

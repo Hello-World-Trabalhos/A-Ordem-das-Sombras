@@ -42,7 +42,7 @@ public class ScenarioOptmizer
         }
     }
 
-    private void DestroyClosedRoomsWithEqualPositions()
+    public void DestroyClosedRoomsWithEqualPositions()
     {
         GameObject[] closedRooms = GameObject.FindGameObjectsWithTag("ClosedRoom");
 
@@ -66,12 +66,12 @@ public class ScenarioOptmizer
                 }
             }
         }
-
+        
         closedRoomsToDestroy.ForEach(closedRoom =>
         {
             if (closedRoom != null)
             {
-                GameObject.Destroy(closedRoom);
+                GameObject.DestroyImmediate(closedRoom);
             }
         });
     }

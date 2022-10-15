@@ -45,7 +45,7 @@ public class RoomSpawner : MonoBehaviour
 
         if (!isSpawned)
         {
-            List<Direction> blockedDirections = roomSpawnChecker.GetBlockedDirections(gameObject);
+            List<Direction> blockedDirections = roomSpawnChecker.GetBlockedDirections(gameObject.transform.position);
             List<GameObject> choosedRoomTemplateArrayCopiedAsList = directionsRoomTemplates[roomConnectedDoorDirection].ToList();
             List<GameObject> choosedRoomtemplatesListFiltered = choosedRoomTemplateArrayCopiedAsList.FindAll(roomTemplate =>
             {
@@ -53,7 +53,8 @@ public class RoomSpawner : MonoBehaviour
 
                 foreach (Direction direction in roomOpenedDirectionsData.openedDirections)
                 {
-                    if (blockedDirections.Contains(direction)) {
+                    if (blockedDirections.Contains(direction))
+                    {
                         return false;
                     }
                 }
@@ -85,13 +86,8 @@ public class RoomSpawner : MonoBehaviour
             if (!other.GetComponent<RoomSpawner>().isSpawned && !isSpawned)
             {
                 Instantiate(roomTemplates.closedRoom, transform.position, Quaternion.identity);
-                // pega posição da colisão
-                // destroi os spawn points se houver
-                // faz raycast para ver quais os lados de aberturas necessários para conectar as rooms
-                // instância essa room
             }
 
-            // destruicao dos spawn points
             Destroy(gameObject);
         }
     }

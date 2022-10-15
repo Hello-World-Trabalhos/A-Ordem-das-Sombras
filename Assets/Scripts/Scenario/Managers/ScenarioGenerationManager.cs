@@ -15,8 +15,9 @@ public class ScenarioGenerationManager : MonoBehaviour
     private PlayerSpawner playerSpawner;
     private RoomSpawnWait roomSpawnWait;
 
-    private ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
-    private TimeUtils timeUtils = new TimeUtils();
+    private readonly ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
+    private readonly RoomSpawnFixer roomSpawnFixer = new RoomSpawnFixer();
+    private readonly TimeUtils timeUtils = new TimeUtils();
 
 
     void Start()
@@ -47,6 +48,7 @@ public class ScenarioGenerationManager : MonoBehaviour
 
     private void PrepareScenario()
     {
+        roomSpawnFixer.ReplaceClosedRoomsForComplementaryRooms();
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
         obstacleSpawner.SpawnObstacles();
         enemySpawner.SpawnEnemies();
