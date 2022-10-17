@@ -9,6 +9,7 @@ public class RoomSpawner : MonoBehaviour
 
     private static readonly RoomSpawnChecker roomSpawnChecker = new RoomSpawnChecker();
     private static Dictionary<Direction, GameObject[]> directionsRoomTemplates;
+    private static RoomsStorage roomsStorage;
     private static RoomTemplates roomTemplates;
     private static RoomSpawnWait roomSpawnWait;
 
@@ -25,6 +26,11 @@ public class RoomSpawner : MonoBehaviour
             directionsRoomTemplates.Add(Direction.LEFT, roomTemplates.leftRooms);
             directionsRoomTemplates.Add(Direction.BOTTOM, roomTemplates.bottomRooms);
             directionsRoomTemplates.Add(Direction.RIGHT, roomTemplates.rightRooms);
+        }
+
+        if (roomsStorage == null)
+        {
+            roomsStorage = GameObject.Find("RoomsStorage").GetComponent<RoomsStorage>();
         }
 
         if (roomSpawnWait == null)
@@ -72,7 +78,8 @@ public class RoomSpawner : MonoBehaviour
             Vector3 position = new Vector3(x, y, z);
             Quaternion rotation = choosedRoomTemplate.transform.rotation;
 
-            Instantiate(choosedRoomTemplate, position, rotation);
+            GameObject roomInstance = Instantiate(choosedRoomTemplate, position, rotation);
+            roomsStorage.AddToNoComplementaryRoomsList(roomInstance);
 
             isSpawned = true;
         }
