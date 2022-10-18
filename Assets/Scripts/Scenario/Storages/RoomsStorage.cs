@@ -32,9 +32,4 @@ public class RoomsStorage : MonoBehaviour
 
         return allSpawnedRooms;
     }
-
-    public GameObject GetBossRoom()
-    {
-        return noComplementarySpawnedRooms.Last();
-    }
 }

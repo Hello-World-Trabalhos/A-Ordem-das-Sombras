@@ -8,6 +8,7 @@ public class InteriorRoomStorage : MonoBehaviour
 
     private RoomsStorage roomsStorage;
     private GameObject[] spawnedInteriorRooms;
+    private GameObject bossInteriorRoom;
 
     void Start()
     {
@@ -41,19 +42,23 @@ public class InteriorRoomStorage : MonoBehaviour
 
     public GameObject GetBossInteriorRoom()
     {
-        GameObject lastSpawnedRoom = roomsStorage.GetAllNoComplementaryRooms().Last();
-        int childNumber = lastSpawnedRoom.transform.childCount;
-
-        for (int i = 0; i < childNumber; i++)
+        if (bossInteriorRoom == null)
         {
-            GameObject child = lastSpawnedRoom.transform.GetChild(i).gameObject;
+            GameObject lastSpawnedRoom = roomsStorage.GetAllNoComplementaryRooms().Last();
+            int childNumber = lastSpawnedRoom.transform.childCount;
 
-            if (child.tag == "InteriorTemplate")
+            for (int i = 0; i < childNumber; i++)
             {
-                return child;
+                GameObject child = lastSpawnedRoom.transform.GetChild(i).gameObject;
+
+                if (child.tag == "InteriorTemplate")
+                {
+                    bossInteriorRoom = child;
+                    break;
+                }
             }
         }
 
-        return null;
+        return bossInteriorRoom;
     }
 }

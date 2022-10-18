@@ -5,6 +5,7 @@ using UnityEngine;
 public class RoomSpawnChecker
 {
     private const float RAY_CAST_DISTANCE = 6.5f;
+    
     public List<Direction> GetBlockedDirections(Vector3 originPosition)
     {
         return CheckWhichDirectionsRayCastCollideByTag(originPosition, "Wall");
