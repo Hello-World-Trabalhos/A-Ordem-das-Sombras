@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour
     Vector2 movement = Vector2.zero;
     public Button btnAttack;
 
-    // Start is called before the first frame update
     void Start()
     {
         GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")

@@ -94,7 +94,7 @@ public class Skeleton : MonoBehaviour
         {
             entity.inCombat = true;
             entity.target = collider.gameObject;
-            //entity.target.GetComponent<BoxCollider2D>().isTrigger = true;
+            entity.target.GetComponent<BoxCollider2D>().isTrigger = true;
         }
     }
 
@@ -105,7 +105,7 @@ public class Skeleton : MonoBehaviour
             entity.inCombat = false;
             if (entity.target)
             {
-                //entity.target.GetComponent<BoxCollider2D>().isTrigger = false;
+                entity.target.GetComponent<BoxCollider2D>().isTrigger = false;
                 entity.target = null;
             }
         }
@@ -123,6 +123,7 @@ public class Skeleton : MonoBehaviour
         {
             animator.SetBool("isWalking", false);
 
+            //faz a movimentação do player
             if (currentWaitTime <= 0)
             {
                 currentWaypoint++;
@@ -164,8 +165,6 @@ public class Skeleton : MonoBehaviour
         // add exp no player
         //Player player = GameObject.FindGameObjectsWithTag("Player").GetComponent<Player>();
         //manager.GainExp(rewardExperience);
-
-        Debug.Log("O inimigo morreu: " + entity.name);
 
         StopAllCoroutines();
         //StartCoroutine(Respawn());
