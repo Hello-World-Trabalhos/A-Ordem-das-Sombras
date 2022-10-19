@@ -192,7 +192,7 @@ MonoBehaviour:
     resistence: 1
     damage: 50
     defence: 0
-    speed: 3
+    speed: 4
     attackDistance: 0.5
     attackTimer: 1
     coolDown: 2

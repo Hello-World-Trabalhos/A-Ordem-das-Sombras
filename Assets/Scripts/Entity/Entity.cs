@@ -24,7 +24,7 @@ public class Entity
     public int resistence;
     public int damage;
     public int defence;
-    public float speed = 2.5f;
+    public float speed;
 
     [Header("Combat")]
     public float attackDistance = 0.5f;
