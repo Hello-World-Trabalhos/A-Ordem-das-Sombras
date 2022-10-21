@@ -6,10 +6,6 @@ public class Player : MonoBehaviour
 {
     public Entity entity;
 
-    //[Header("Player UI")]
-    //public Slider health;
-    //public Slider experience;
-
     private Slider hpSliper;
     private Slider xpSliper;
 

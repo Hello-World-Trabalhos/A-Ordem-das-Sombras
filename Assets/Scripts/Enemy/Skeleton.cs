@@ -167,7 +167,6 @@ public class Skeleton : MonoBehaviour
         //manager.GainExp(rewardExperience);
 
         StopAllCoroutines();
-        //StartCoroutine(Respawn());
     }
 
     IEnumerator Attack()
