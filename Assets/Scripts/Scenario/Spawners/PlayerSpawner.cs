@@ -26,10 +26,6 @@ public class PlayerSpawner : MonoBehaviour
     public void SpawnPlayerWithoutScript()
     {
         SpawnPlayer();
-        MonoBehaviour[] playerScripts = spawnedPlayerReference.GetComponents<MonoBehaviour>();
-        for (int i = 0; i < playerScripts.Length; i++)
-        {
-            Destroy(playerScripts[i]);
-        }
+        new GameObjectUtils().DestroyAllScriptsInObject(spawnedPlayerReference);
     }
 }
