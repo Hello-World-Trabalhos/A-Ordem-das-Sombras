@@ -11,36 +11,29 @@ public class Skull : MonoBehaviour
     [Header("Controller")]
     public Entity entity;
 
-    [Header("Patrol")]
-    public Transform[] waypointList;
-    public float arrivalDistance = 0.5f;
-    public float waitTime = 5;
-
-    //private Variables
-    Transform targetWaypoint;
-    int currentWaypoint = 0;
-    float lastDistanceToTarget = 0f;
-    float currentWaitTime = 0f;
-
 
     Rigidbody2D rb2D;
     Animator animator;
+    float input_x = 0;
+    float input_y = 0;
+
+    [Header("Patrol")]
+    [SerializeField] private float stopDistance;
+    [SerializeField] private float startDistance;
+    private Vector3 localScale;
 
     private void Start()
     {
+        SetTarget();
+
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
 
         entity.currentHealth = entity.maxHealth;
 
-        currentWaitTime = waitTime;
-        if (waypointList.Length > 0)
-        {
-            targetWaypoint = waypointList[currentWaypoint];
-            lastDistanceToTarget = Vector2.Distance(transform.position, targetWaypoint.position);
-        }
     }
 
+    
     private void Update()
     {
         if (entity.dead)
@@ -54,39 +47,56 @@ public class Skull : MonoBehaviour
             Die();
         }
 
-        if (!entity.inCombat)
-        {
-            if (waypointList.Length > 0)
-            {
-                Patrol();
-            }
-            else
-            {
-                animator.SetBool("isWalking", false);
-            }
-        }
-        else
-        {
-            if (entity.attackTimer > 0)
-                entity.attackTimer -= Time.deltaTime;
+        Move();
+    }
 
-            if (entity.attackTimer < 0)
-                entity.attackTimer = 0;
-
-            if (entity.target != null && entity.inCombat)
-            {
-                // atacar
-                if (!entity.combatCoroutine)
-                    StartCoroutine(Attack());
-            }
-            else
-            {
-                entity.combatCoroutine = false;
-                StopCoroutine(Attack());
-            }
+    #region New code
+    private void SetTarget()
+    {
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+        {
+            entity.target = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 
+    private void Move()
+    {
+        if (!entity.target)
+            return;
+
+        if (Distance())
+        {
+            transform.position = Vector2.MoveTowards(transform.position, entity.target.position, entity.speed * Time.deltaTime);
+
+            animator.SetBool("isWalking", true);
+            LocalAt();
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+            //to do attack
+        }
+    }
+
+    private bool Distance()
+    {
+        if ((Vector3.Distance(transform.position, entity.target.position) > stopDistance) && Vector3.Distance(transform.position, entity.target.position) < startDistance)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    private void LocalAt()
+    {
+        localScale = transform.localScale;
+        localScale.x = transform.position.x > entity.target.position.x ? Mathf.Abs(localScale.x) : -Mathf.Abs(localScale.x);
+        transform.localScale = localScale;
+    }
+    #endregion
+
+    #region Old Code
+    /*
     private void OnTriggerStay2D(Collider2D collider)
     {
         if (collider.tag == "Player" && !entity.dead)
@@ -151,7 +161,8 @@ public class Skull : MonoBehaviour
 
         rb2D.MovePosition(rb2D.position + direction * (entity.speed * Time.fixedDeltaTime));
     }
-
+    */
+    #endregion
     void Die()
     {
         entity.dead = true;

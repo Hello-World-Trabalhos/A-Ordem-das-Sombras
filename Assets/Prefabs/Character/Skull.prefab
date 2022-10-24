@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2876272854591774117}
   - component: {fileID: -7702707298987570455}
   - component: {fileID: 383175669895002171}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Skull
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: -2739807658926110822, guid: 572b06d271baf9f49b9f7ffdff35db77, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.34375, y: 0.71875}
@@ -182,16 +182,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entity:
-    name: 
+    name: Skull
     level: 1
-    currentHealth: 0
-    maxHealth: 0
+    currentHealth: 10
+    maxHealth: 10
     currentXP: 0
     maxXP: 0
     strength: 1
     resistence: 1
-    damage: 1
+    damage: 50
     defence: 1
+    radius: 0
     speed: 2.5
     attackDistance: 0.5
     attackTimer: 1
@@ -201,6 +202,5 @@ MonoBehaviour:
     combatCoroutine: 0
     dead: 0
     entityAudio: {fileID: 0}
-  waypointList: []
-  arrivalDistance: 0.5
-  waitTime: 5
+  stopDistance: 1
+  startDistance: 5

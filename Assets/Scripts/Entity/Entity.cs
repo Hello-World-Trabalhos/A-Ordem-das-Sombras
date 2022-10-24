@@ -24,6 +24,7 @@ public class Entity
     public int resistence;
     public int damage;
     public int defence;
+    //public float radius;
     public float speed;
 
     [Header("Combat")]
@@ -31,7 +32,7 @@ public class Entity
     public float attackTimer = 1f;
     public float coolDown = 2f;
     public bool inCombat = false;
-    public GameObject target;
+    public Transform target;
     public bool combatCoroutine = false;
     public bool dead = false;
 

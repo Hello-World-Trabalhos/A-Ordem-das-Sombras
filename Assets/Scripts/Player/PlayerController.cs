@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
                 result = 0;
 
             skeleton.entity.currentHealth -= result;
-            skeleton.entity.target = this.gameObject;
+            //skeleton.entity.target = this.gameObject;
         }
     }
 }
