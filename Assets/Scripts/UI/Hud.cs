@@ -3,11 +3,13 @@ using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
+    private readonly AudioConfig audioConfig = new AudioConfig();
     private readonly GameStateManager gameStateManager = new GameStateManager();
     private GameObject hud;
     private GameObject pauseMenu;
     private GameObject initialMenu;
     private GameObject settingsPanel;
+    private AudioManager audioManager;
 
     void Start()
     {
@@ -16,6 +18,7 @@ public class Hud : MonoBehaviour
         pauseMenu = canvasTransform.Find("PauseMenu").gameObject;
         initialMenu = pauseMenu.transform.Find("InitialMenu").gameObject;
         settingsPanel = pauseMenu.transform.Find("SettingsPanel").gameObject;
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     public void LoadMainMenu()
@@ -54,10 +57,9 @@ public class Hud : MonoBehaviour
         Toggle musicToggle = settingsPanel.transform.Find("MusicToggle").transform.Find("Toggle").GetComponent<Toggle>();
         Slider musicVolume = settingsPanel.transform.Find("MusicVolumeSlider").transform.Find("Slider").GetComponent<Slider>();
 
-        AudioConfig audioConfig = new AudioConfig();
-
         audioConfig.EnableMusic(musicToggle.isOn);
         audioConfig.SetMusicVolume(musicVolume.value);
+        audioManager.ConfigureAudioBasedOnSavedConfigValues();
     }
 
     private void SetupConfigs()
@@ -65,9 +67,8 @@ public class Hud : MonoBehaviour
         Toggle musicToggle = settingsPanel.transform.Find("MusicToggle").transform.Find("Toggle").GetComponent<Toggle>();
         Slider musicVolume = settingsPanel.transform.Find("MusicVolumeSlider").transform.Find("Slider").GetComponent<Slider>();
 
-        AudioConfig audioConfig = new AudioConfig();
-
         musicToggle.isOn = audioConfig.IsMusicEnabled();
         musicVolume.value = audioConfig.GetMusicVolume();
+        audioManager.ConfigureAudioBasedOnSavedConfigValues();
     }
 }
