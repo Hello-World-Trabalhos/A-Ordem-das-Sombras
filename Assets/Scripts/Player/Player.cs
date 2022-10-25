@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     public int expBase;
     public int expLeft;
     public float expMod;
-    public GameObject regenerationFx;
-    public AudioClip regenerationSound;
+    [SerializeField] private GameObject regenerationFx;
+    [SerializeField] private AudioClip regenerationSound;
     public Button btnPotion;
 
     void Start()

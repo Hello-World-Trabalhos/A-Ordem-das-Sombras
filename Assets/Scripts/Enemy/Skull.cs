@@ -14,8 +14,6 @@ public class Skull : MonoBehaviour
 
     Rigidbody2D rb2D;
     Animator animator;
-    float input_x = 0;
-    float input_y = 0;
 
     [Header("Patrol")]
     [SerializeField] private float stopDistance;
