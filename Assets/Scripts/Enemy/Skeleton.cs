@@ -190,7 +190,7 @@ public class Skeleton : MonoBehaviour
     {
         if (Time.time > timerAttackFinish)
         {
-
+            animator.SetBool("attack", false);
         }
     }
     void Die()
