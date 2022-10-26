@@ -656,7 +656,6 @@ MonoBehaviour:
     resistence: 1
     damage: 10
     defence: 0
-    radius: 0
     speed: 2.5
     attackDistance: 0.5
     attackTimer: 1
@@ -666,9 +665,11 @@ MonoBehaviour:
     combatCoroutine: 0
     dead: 0
     entityAudio: {fileID: 0}
-  detection: {fileID: 3364034792096718868}
-  stopDistance: 1
+  stopDistance: 1.5
   startDistance: 5
+  detection: {fileID: 3364034792096718868}
+  waitAttack: 0.5
+  waitAttackFinish: 0.5
 --- !u!1 &8483523999618538730
 GameObject:
   m_ObjectHideFlags: 0

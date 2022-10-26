@@ -11,19 +11,6 @@ public class Skeleton : MonoBehaviour
 {
     [Header("Controller")]
     public Entity entity = new Entity();
-    [SerializeField] private Detection detection;
-
-
-    //public Transform[] waypointList;
-    //public float arrivalDistance = 0.5f;
-    //public float waitTime = 5;
-
-    //private Variables
-    //Transform targetWaypoint;
-    //int currentWaypoint = 0;
-    //float lastDistanceToTarget = 0f;
-    //float currentWaitTime = 0f;
-
 
     Rigidbody2D rb2D;
     Animator animator;
@@ -34,7 +21,12 @@ public class Skeleton : MonoBehaviour
     [SerializeField] private float startDistance;
     private Vector3 localScale;
 
-
+    [Header("Attack")]
+    [SerializeField] private Detection detection;
+    [SerializeField] private float waitAttack = 0.5f;
+    [SerializeField] private float waitAttackFinish = 0.5f;
+    private float timerAttack;
+    private float timerAttackFinish;
     private void Start()
     {
         SetTarget();
@@ -48,6 +40,7 @@ public class Skeleton : MonoBehaviour
 
     private void Update()
     {
+        //old code
         if (entity.dead)
         {
             return;
@@ -59,7 +52,21 @@ public class Skeleton : MonoBehaviour
             Die();
         }
 
-        Move();
+        //new code
+        if (!entity.target)
+            return;
+
+        if (Distance())
+        {
+            Move();
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+            FinishAttack();
+            Attack();
+            //to do attack
+        }
     }
 
     private void SetTarget()
@@ -72,21 +79,10 @@ public class Skeleton : MonoBehaviour
 
     private void Move()
     {
-        if (!entity.target)
-            return;
+    transform.position = Vector2.MoveTowards(transform.position, entity.target.position, entity.speed * Time.deltaTime);
 
-        if (Distance())
-        {
-            transform.position = Vector2.MoveTowards(transform.position, entity.target.position, entity.speed * Time.deltaTime);
-
-            animator.SetBool("isWalking", true);
-            LocalAt();
-        }
-        else
-        {
-            animator.SetBool("isWalking", false);
-            //to do attack
-        }
+    animator.SetBool("isWalking", true);
+    LocalAt();
     }
 
     private bool Distance()
@@ -182,6 +178,21 @@ public class Skeleton : MonoBehaviour
     */
     #endregion
 
+    private void Attack()
+    {
+        timerAttackFinish = Time.time + waitAttackFinish;
+        timerAttack = Time.time + waitAttack;
+        animator.SetBool("attack", true);
+
+    }
+
+    private void FinishAttack()
+    {
+        if (Time.time > timerAttackFinish)
+        {
+
+        }
+    }
     void Die()
     {
         entity.dead = true;
@@ -197,7 +208,7 @@ public class Skeleton : MonoBehaviour
         StopAllCoroutines();
     }
 
-    IEnumerator Attack()
+    IEnumerator Attack1()
     {
         entity.combatCoroutine = true;
 
