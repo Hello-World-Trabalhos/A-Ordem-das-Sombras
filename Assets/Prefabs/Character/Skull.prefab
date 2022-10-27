@@ -1,5 +1,56 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5406482271412658414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5792202970126475396}
+  - component: {fileID: 2698886390549289649}
+  m_Layer: 6
+  m_Name: Hit
+  m_TagString: Enemy
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5792202970126475396
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406482271412658414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5542771433806368403}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2698886390549289649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5406482271412658414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: badf41e59e57c024381a8f237bb027ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShowDraw: 1
+  activeTimer: 0.1
+  pointDetection: {fileID: 5792202970126475396}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  radius: 2
+  damage: 40
 --- !u!1 &5542771433806368494
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +66,7 @@ GameObject:
   - component: {fileID: 2876272854591774117}
   - component: {fileID: -7702707298987570455}
   - component: {fileID: 383175669895002171}
+  - component: {fileID: 6192071316756807262}
   m_Layer: 6
   m_Name: Skull
   m_TagString: Enemy
@@ -31,8 +83,9 @@ Transform:
   m_GameObject: {fileID: 5542771433806368494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_Children:
+  - {fileID: 5792202970126475396}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -192,15 +245,34 @@ MonoBehaviour:
     resistence: 1
     damage: 50
     defence: 1
-    radius: 0
     speed: 2.5
-    attackDistance: 0.5
+    attackDistance: 1
     attackTimer: 1
     coolDown: 2
     inCombat: 0
     target: {fileID: 0}
     combatCoroutine: 0
-    dead: 0
-    entityAudio: {fileID: 0}
+    isDead: 0
+    isHurt: 0
   stopDistance: 1
   startDistance: 5
+  detection: {fileID: 2698886390549289649}
+  waitAttack: 1
+  waitAttackFinish: 0.5
+  timeLoader: 1.5
+--- !u!114 &6192071316756807262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542771433806368494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56221ac1545f4da4cbbfcf1c89ebeb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 10
+  maxHealth: 10
+  caracter: {fileID: 383175669895002171}
+  hpSliper: {fileID: 0}

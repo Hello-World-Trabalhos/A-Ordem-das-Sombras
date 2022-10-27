@@ -37,7 +37,5 @@ public class Entity
     public bool isDead = false;
     public bool isHurt = false;
 
-    [Header("Component")]
-    public AudioSource entityAudio;
 
 }

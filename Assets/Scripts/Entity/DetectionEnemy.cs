@@ -70,11 +70,11 @@ public class DetectionEnemy : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    healthEnemy = Physics2D.OverlapCircle(pointDetection.position, radius, layerMask).GetComponent<HealthEnemy>();
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        healthEnemy = Physics2D.OverlapCircle(pointDetection.position, radius, layerMask).GetComponent<HealthEnemy>();
 
-    //    healthEnemy.TakeDamage(damage);
-
-    //}
+        healthEnemy.TakeDamage(damage);
+        //canDamage = false;
+    }
 }

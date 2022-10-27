@@ -14,21 +14,23 @@ public class Player : MonoBehaviour
     public int expBase;
     public int expLeft;
     public float expMod;
-    [SerializeField] private GameObject regenerationFx;
-    [SerializeField] private AudioClip regenerationSound;
+    [SerializeField] public GameObject regenerationFx;
+    [SerializeField] public AudioClip regenerationSound;
     public Button btnPotion;
 
-    [Header("Detection")]
+    /*[Header("Detection")]
     [SerializeField] private bool isShowDraw;
     [SerializeField] private float activeTimer = 0.1f;
     [SerializeField] private Transform pointDetection;
     [SerializeField] private LayerMask layerMask;
-    [SerializeField] private float radius;
+    [SerializeField] private float radius;*/
 
+    [Header("Attack")]
+    [SerializeField] private DetectionEnemy DetectionEnemy;
     private HealthEnemy healthEnemy;
 
-    private float timer;
-    private bool canDamage = true;
+    //private float timer;
+    //private bool canDamage = true;
     public float timeLoader = 1.5f;
 
     void Start()
@@ -111,12 +113,19 @@ public class Player : MonoBehaviour
         entity.inCombat = false;
         entity.target = null;
         Invoke("DestroyPlayer",timeLoader);
-        Destroy(gameObject);
         
     }
+
+    private void CanAttack()
+    {
+        DetectionEnemy.gameObject.SetActive(true);
+        DetectionEnemy.ResetTimer();
+    }
+
     public void DestroyPlayer()
     {
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        SceneLoader.LoadMainMenu();
     }
 
     public void TakeDamage(int damage)

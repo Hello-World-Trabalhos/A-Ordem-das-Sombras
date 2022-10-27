@@ -129,4 +129,13 @@ public class PlayerController : MonoBehaviour
             skeleton.entity.target = this.transform;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.transform.tag == "Enemy")
+        {
+            player.entity.target = collider.transform;
+            Attack();
+        }
+    }
 }

@@ -7,11 +7,18 @@ public class HealthEnemy : MonoBehaviour
     public int currentHealth;
     public int maxHealth;
     [SerializeField] private Caracter caracter;
+    [SerializeField] public Slider hpSliper;
 
 
     void Start()
     {
         currentHealth = maxHealth;
+
+        if (hpSliper != null)
+        {
+            hpSliper.maxValue = maxHealth;
+            hpSliper.value = hpSliper.maxValue;
+        }
     }
 
     public void TakeDamage(int damage)
@@ -20,6 +27,9 @@ public class HealthEnemy : MonoBehaviour
             return;
 
         currentHealth -= damage;
+
+        if (hpSliper != null)
+            hpSliper.value -= damage;
 
         if (currentHealth <= 0)
         {

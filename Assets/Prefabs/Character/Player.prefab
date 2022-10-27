@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1318183559331720277}
   m_Layer: 7
   m_Name: Hit
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3946768492323416178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.352, y: -0, z: 0}
+  m_LocalPosition: {x: -0.012, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5542771433806368403}
@@ -43,14 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc84ba48e5613b4cabcbf9957921e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShowDraw: 1
+  isShowDraw: 0
   activeTimer: 0.1
   pointDetection: {fileID: 1147305688491304965}
   layerMask:
     serializedVersion: 2
-    m_Bits: 64
-  radius: 0.5
-  damage: 10
+    m_Bits: 320
+  radius: 1.1
+  damage: 51
 --- !u!1 &5542771433806368494
 GameObject:
   m_ObjectHideFlags: 0
@@ -82,7 +82,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5542771433806368494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0.09, y: 1, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 1147305688491304965}
@@ -172,7 +172,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0075833797, y: -0.18896425}
+  m_Offset: {x: 0.0075833797, y: -0.23565239}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -183,7 +183,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4994986, y: 0.4299599}
+  m_Size: {x: 0.4994986, y: 0.3365836}
   m_EdgeRadius: 0
 --- !u!50 &2876272854591774117
 Rigidbody2D:
@@ -269,12 +269,12 @@ MonoBehaviour:
     combatCoroutine: 0
     isDead: 0
     isHurt: 0
-    entityAudio: {fileID: 0}
   currentExp: 0
   expBase: 0
   expLeft: 0
   expMod: 0
   regenerationFx: {fileID: 0}
-  regenerationSound: {fileID: 0}
+  regenerationSound: {fileID: 8300000, guid: 2847664cc602b1b4baccf974bf9b1f1f, type: 3}
   btnPotion: {fileID: 0}
+  DetectionEnemy: {fileID: 1318183559331720277}
   timeLoader: 1.5

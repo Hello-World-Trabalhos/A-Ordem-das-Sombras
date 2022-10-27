@@ -6,7 +6,7 @@ using System;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
-public class Skull : MonoBehaviour
+public class Skull : Caracter
 {
     [Header("Controller")]
     public Entity entity;
@@ -19,6 +19,17 @@ public class Skull : MonoBehaviour
     [SerializeField] private float stopDistance;
     [SerializeField] private float startDistance;
     private Vector3 localScale;
+
+    [Header("Attack")]
+    [SerializeField] private Detection detection;
+    [SerializeField] private float waitAttack = 0.5f;
+    [SerializeField] private float waitAttackFinish = 0.5f;
+    private float timerAttack;
+    private float timerAttackFinish;
+
+
+    [Header("Die")]
+    public float timeLoader = 0.5f;
 
     private void Start()
     {
@@ -45,7 +56,20 @@ public class Skull : MonoBehaviour
             Die();
         }
 
-        Move();
+        //new code
+        if (!entity.target)
+            return;
+
+        if (Distance())
+        {
+            Move();
+        }
+        else
+        {
+            animator.SetBool("isWalking", false);
+            Attack();
+            //to do attack
+        }
     }
 
     #region New code
@@ -68,6 +92,14 @@ public class Skull : MonoBehaviour
 
             animator.SetBool("isWalking", true);
             LocalAt();
+
+            
+
+            //if (timerAttackFinish < Time.deltaTime)
+            //{
+            //    Die();
+            //}
+
         }
         else
         {
@@ -92,6 +124,51 @@ public class Skull : MonoBehaviour
         transform.localScale = localScale;
     }
     #endregion
+    private void CanAttack()
+    {
+        detection.gameObject.SetActive(true);
+        detection.ResetTimer();
+    }
+    private void Attack()
+    {
+        if ((Vector3.Distance(transform.position, entity.target.position) < startDistance))
+        {
+            timerAttackFinish = Time.time + waitAttackFinish;
+            timerAttack = Time.time + waitAttack;
+
+            animator.SetBool("attack", true);
+            Die();
+        }
+
+    }
+    public void Die()
+    {
+        entity.isDead = true;
+        entity.inCombat = false;
+        entity.target = null;
+
+        animator.SetBool("isWalking", false);
+        Invoke("DestroyEnemy", timeLoader);
+        // add exp no player
+        //Player player = GameObject.FindGameObjectsWithTag("Player").GetComponent<Player>();
+        //manager.GainExp(rewardExperience);
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (entity.currentHealth <= 0)
+            return;
+
+        entity.currentHealth -= damage;
+
+        animator.SetBool("isWalking", false);
+
+    }
 
     #region Old Code
     /*
@@ -161,25 +238,8 @@ public class Skull : MonoBehaviour
     }
     */
     #endregion
-    void Die()
-    {
-        entity.isDead = true;
-        entity.inCombat = false;
-        entity.target = null;
 
-        animator.SetBool("isWalking", false);
-
-        // add exp no player
-        //Player player = GameObject.FindGameObjectsWithTag("Player").GetComponent<Player>();
-        //manager.GainExp(rewardExperience);
-
-        Debug.Log("O inimigo morreu: " + entity.name);
-
-        StopAllCoroutines();
-        //StartCoroutine(Respawn());
-    }
-
-    IEnumerator Attack()
+    IEnumerator Attack1()
     {
         entity.combatCoroutine = true;
 
@@ -207,5 +267,14 @@ public class Skull : MonoBehaviour
                 }
             }
         }
+    }
+
+    public override void Died()
+    {
+        entity.isDead = true;
+        entity.target = null;
+
+        animator.SetBool("isWalking", false);
+        Invoke("DestroyEnemy", timeLoader);
     }
 }

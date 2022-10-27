@@ -11,7 +11,7 @@ public class Skeleton : Caracter
 {
     [Header("Controller")]
     public Entity entity = new Entity();
-    [SerializeField] public Slider hpSliper;
+    //[SerializeField] public Slider hpSliper;
 
     Rigidbody2D rb2D;
     Animator animator;
@@ -41,11 +41,8 @@ public class Skeleton : Caracter
 
         entity.currentHealth = entity.maxHealth;
 
-        //hpSliper = GetComponent<Slider>();
-
-        entity.currentHealth = entity.maxHealth;
-        hpSliper.maxValue = entity.maxHealth;
-        hpSliper.value = hpSliper.maxValue;
+        //hpSliper.maxValue = entity.maxHealth;
+        //hpSliper.value = hpSliper.maxValue;
 
     }
 
@@ -159,8 +156,8 @@ public class Skeleton : Caracter
         if (entity.currentHealth <= 0)
             return;
 
-        entity.currentHealth -= damage;
-        hpSliper.value -= damage;
+        //entity.currentHealth -= damage;
+        //hpSliper.value -= damage;
 
         animator.SetBool("isWalking", false);
 
@@ -170,6 +167,7 @@ public class Skeleton : Caracter
     {
         entity.isDead = true;
         entity.target = null;
+        entity.currentHealth = 0;
 
         animator.SetBool("isWalking", false);
         Invoke("DestroyEnemy", timeLoader);
