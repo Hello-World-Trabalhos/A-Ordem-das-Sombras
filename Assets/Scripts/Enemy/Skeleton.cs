@@ -7,10 +7,11 @@ using System;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Animator))]
 
-public class Skeleton : MonoBehaviour
+public class Skeleton : Caracter
 {
     [Header("Controller")]
     public Entity entity = new Entity();
+    [SerializeField] public Slider hpSliper;
 
     Rigidbody2D rb2D;
     Animator animator;
@@ -27,6 +28,10 @@ public class Skeleton : MonoBehaviour
     [SerializeField] private float waitAttackFinish = 0.5f;
     private float timerAttack;
     private float timerAttackFinish;
+
+    [Header("Die")]
+    public float timeLoader = 1.5f;
+
     private void Start()
     {
         SetTarget();
@@ -36,12 +41,18 @@ public class Skeleton : MonoBehaviour
 
         entity.currentHealth = entity.maxHealth;
 
+        //hpSliper = GetComponent<Slider>();
+
+        entity.currentHealth = entity.maxHealth;
+        hpSliper.maxValue = entity.maxHealth;
+        hpSliper.value = hpSliper.maxValue;
+
     }
 
     private void Update()
     {
         //old code
-        if (entity.dead)
+        if (entity.isDead)
         {
             return;
         }
@@ -106,83 +117,15 @@ public class Skeleton : MonoBehaviour
         detection.gameObject.SetActive(true);
         detection.ResetTimer();
     }
-    //OLD CODE
-    #region old code
-    /*
-    private void OnTriggerStay2D(Collider2D collider)
-    {
-        if (collider.tag == "Player" && !entity.dead)
-        {
-            entity.inCombat = true;
-            //entity.target = collider.gameObject;
-            entity.target.GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collider)
-    {
-        if (collider.tag == "Player")
-        {
-            entity.inCombat = false;
-            if (entity.target)
-            {
-                entity.target.GetComponent<BoxCollider2D>().isTrigger = false;
-                entity.target = null;
-            }
-        }
-    }
-
-
-    void Patrol()
-    {
-        if (entity.dead)
-            return;
-
-        // calcular a distance do waypoint
-        //float distanceToTarget = Vector2.Distance(transform.position, targetWaypoint.position);
-
-        //if (distanceToTarget <= arrivalDistance || distanceToTarget >= lastDistanceToTarget)
-        //{
-        //    animator.SetBool("isWalking", false);
-
-        //    //faz a movimentação do player
-        //    if (currentWaitTime <= 0)
-        //    {
-        //        currentWaypoint++;
-
-        //        if (currentWaypoint >= waypointList.Length)
-        //            currentWaypoint = 0;
-
-        //        targetWaypoint = waypointList[currentWaypoint];
-        //        lastDistanceToTarget = Vector2.Distance(transform.position, targetWaypoint.position);
-
-        //        currentWaitTime = waitTime;
-        //    }
-        //    else
-        //    {
-        //        currentWaitTime -= Time.deltaTime;
-        //    }
-        //}
-        //else
-        //{
-        //    animator.SetBool("isWalking", true);
-        //    lastDistanceToTarget = distanceToTarget;
-        //}
-
-        //Vector2 direction = (targetWaypoint.position - transform.position).normalized;
-        //animator.SetFloat("input_x", direction.x);
-        //animator.SetFloat("input_y", direction.y);
-
-        //rb2D.MovePosition(rb2D.position + direction * (entity.speed * Time.fixedDeltaTime));
-    }
-    */
-    #endregion
 
     private void Attack()
     {
-        timerAttackFinish = Time.time + waitAttackFinish;
-        timerAttack = Time.time + waitAttack;
-        animator.SetBool("attack", true);
+        if((Vector3.Distance(transform.position, entity.target.position) < startDistance))
+        {
+            timerAttackFinish = Time.time + waitAttackFinish;
+            timerAttack = Time.time + waitAttack;
+            animator.SetBool("attack", true);
+        }
 
     }
 
@@ -193,48 +136,72 @@ public class Skeleton : MonoBehaviour
             animator.SetBool("attack", false);
         }
     }
-    void Die()
+    public void Die()
     {
-        entity.dead = true;
+        entity.isDead = true;
         entity.inCombat = false;
         entity.target = null;
 
         animator.SetBool("isWalking", false);
-
+        Invoke("DestroyEnemy", timeLoader);
         // add exp no player
         //Player player = GameObject.FindGameObjectsWithTag("Player").GetComponent<Player>();
         //manager.GainExp(rewardExperience);
-
-        StopAllCoroutines();
     }
 
-    IEnumerator Attack1()
+    private void DestroyEnemy()
     {
-        entity.combatCoroutine = true;
-
-        while (true)
-        {
-            yield return new WaitForSeconds(entity.coolDown);
-
-            if (entity.target != null && !entity.target.GetComponent<Player>().entity.dead)
-            {
-                animator.SetBool("attack", true);
-
-                float distance = Vector2.Distance(entity.target.transform.position, transform.position);
-
-                if (distance <= entity.attackDistance)
-                {
-                    int dmg = entity.damage;
-                    int targetDef = entity.defence;
-                    int dmgResult = dmg - targetDef;
-
-                    if (dmgResult < 0)
-                        dmgResult = 0;
-
-                    // subtraindo a vida do player
-                    entity.target.GetComponent<Player>().entity.currentHealth -= dmgResult;
-                }
-            }
-        }
+        Destroy(gameObject);
     }
+
+    public void TakeDamage(int damage)
+    {
+        if (entity.currentHealth <= 0)
+            return;
+
+        entity.currentHealth -= damage;
+        hpSliper.value -= damage;
+
+        animator.SetBool("isWalking", false);
+
+    }
+
+    public override void Died()
+    {
+        entity.isDead = true;
+        entity.target = null;
+
+        animator.SetBool("isWalking", false);
+        Invoke("DestroyEnemy", timeLoader);
+    }
+    /*
+IEnumerator Attack1()
+{
+   entity.combatCoroutine = true;
+
+   while (true)
+   {
+       yield return new WaitForSeconds(entity.coolDown);
+
+       if (entity.target != null && !entity.target.GetComponent<Player>().entity.isDead)
+       {
+           animator.SetBool("attack", true);
+
+           float distance = Vector2.Distance(entity.target.transform.position, transform.position);
+
+           if (distance <= entity.attackDistance)
+           {
+               int dmg = entity.damage;
+               int targetDef = entity.defence;
+               int dmgResult = dmg - targetDef;
+
+               if (dmgResult < 0)
+                   dmgResult = 0;
+
+               // subtraindo a vida do player
+               entity.target.GetComponent<Player>().entity.currentHealth -= dmgResult;
+           }
+       }
+   }
+}*/
 }

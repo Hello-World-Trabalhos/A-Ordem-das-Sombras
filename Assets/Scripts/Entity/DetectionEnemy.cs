@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Detection : MonoBehaviour
+public class DetectionEnemy : MonoBehaviour
 {
     [SerializeField] private bool isShowDraw;
     [SerializeField] private float activeTimer = 0.1f;
@@ -10,8 +10,12 @@ public class Detection : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float radius;
 
+    private HealthEnemy healthEnemy;
+
     private float timer;
     private bool canDamage = true;
+    //private Skeleton skeleton;
+    public int damage = 10;
 
     void Awake()
     {
@@ -42,9 +46,14 @@ public class Detection : MonoBehaviour
     {
         if(Physics2D.OverlapCircle(pointDetection.position, radius, layerMask))
         {
+            healthEnemy = Physics2D.OverlapCircle(pointDetection.position, radius, layerMask).GetComponent<HealthEnemy>();
+            if (healthEnemy == null)
+                return;
+
             if (canDamage)
             {
-
+                healthEnemy.TakeDamage(damage);
+                canDamage = false;
             }
         }
     }
@@ -60,4 +69,12 @@ public class Detection : MonoBehaviour
             }
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    healthEnemy = Physics2D.OverlapCircle(pointDetection.position, radius, layerMask).GetComponent<HealthEnemy>();
+
+    //    healthEnemy.TakeDamage(damage);
+
+    //}
 }

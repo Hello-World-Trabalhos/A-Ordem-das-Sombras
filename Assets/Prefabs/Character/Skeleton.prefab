@@ -462,6 +462,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   radius: 0.5
+  damage: 10
 --- !u!1 &5542771433806368494
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,6 +478,7 @@ GameObject:
   - component: {fileID: 2876272854591774117}
   - component: {fileID: -7702707298987570455}
   - component: {fileID: 7141195975359703105}
+  - component: {fileID: 7032775102196053853}
   m_Layer: 6
   m_Name: Skeleton
   m_TagString: Enemy
@@ -663,13 +665,31 @@ MonoBehaviour:
     inCombat: 0
     target: {fileID: 0}
     combatCoroutine: 0
-    dead: 0
+    isDead: 0
+    isHurt: 0
     entityAudio: {fileID: 0}
+  hpSliper: {fileID: 4477572864987077884}
   stopDistance: 1.5
   startDistance: 5
   detection: {fileID: 3364034792096718868}
   waitAttack: 0.5
   waitAttackFinish: 0.5
+  timeLoader: 1.5
+--- !u!114 &7032775102196053853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5542771433806368494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56221ac1545f4da4cbbfcf1c89ebeb96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 100
+  maxHealth: 100
+  caracter: {fileID: 7141195975359703105}
 --- !u!1 &8483523999618538730
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,8 +34,10 @@ public class Entity
     public bool inCombat = false;
     public Transform target;
     public bool combatCoroutine = false;
-    public bool dead = false;
+    public bool isDead = false;
+    public bool isHurt = false;
 
     [Header("Component")]
     public AudioSource entityAudio;
+
 }

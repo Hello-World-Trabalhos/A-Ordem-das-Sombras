@@ -34,7 +34,7 @@ public class Skull : MonoBehaviour
     
     private void Update()
     {
-        if (entity.dead)
+        if (entity.isDead)
         {
             return;
         }
@@ -163,7 +163,7 @@ public class Skull : MonoBehaviour
     #endregion
     void Die()
     {
-        entity.dead = true;
+        entity.isDead = true;
         entity.inCombat = false;
         entity.target = null;
 
@@ -187,7 +187,7 @@ public class Skull : MonoBehaviour
         {
             yield return new WaitForSeconds(entity.coolDown);
 
-            if (entity.target != null && !entity.target.GetComponent<Player>().entity.dead)
+            if (entity.target != null && !entity.target.GetComponent<Player>().entity.isDead)
             {
                 animator.SetBool("attack", true);
 

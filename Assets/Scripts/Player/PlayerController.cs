@@ -101,13 +101,6 @@ public class PlayerController : MonoBehaviour
         rb2.MovePosition(rb2.position + movement * player.entity.speed * Time.fixedDeltaTime);
     }
 
-    //private void OnTriggerExit2D(Collider2D collider)
-    //{
-    //    if (collider.transform.tag == "Enemy")
-    //    {
-    //        player.entity.target = null;
-    //    }
-    //}
     void Attack()
     {
         if (player.entity.target == null)
@@ -115,7 +108,7 @@ public class PlayerController : MonoBehaviour
 
         Skeleton skeleton = player.entity.target.GetComponent<Skeleton>();
 
-        if (skeleton.entity.dead)
+        if (skeleton.entity.isDead)
         {
             player.entity.target = null;
             return;
@@ -133,7 +126,7 @@ public class PlayerController : MonoBehaviour
                 result = 0;
 
             skeleton.entity.currentHealth -= result;
-            //skeleton.entity.target = this.gameObject;
+            skeleton.entity.target = this.transform;
         }
     }
 }
