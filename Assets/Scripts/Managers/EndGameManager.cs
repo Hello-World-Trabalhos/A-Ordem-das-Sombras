@@ -10,9 +10,7 @@ public class EndGameManager : MonoBehaviour
 
     public void ShowEndGamePanel(EndGameOption reason)
     {
-        // GameStateManager irá conter métodos estáticos
-        GameStateManager gameStateManager = new GameStateManager();
-        gameStateManager.PauseGame();
+        GameStateManager.PauseGame();
         
         GameObject hudCanvas = GameObject.FindWithTag("Hud").transform.Find("Canvas").gameObject;
         if (hudCanvas != null) {
@@ -25,15 +23,13 @@ public class EndGameManager : MonoBehaviour
         endGamePanel.transform.Find("PresentationText").GetComponent<Text>().text = GetTextFromReason(reason);
         endGamePanel.transform.Find("PlayButton").GetComponent<Button>().onClick.AddListener(() =>
         {
-            // retirar esses resumes
-            gameStateManager.ResumeGame();
+            GameStateManager.ResumeGame();
             SceneLoader.ReloadCurrentScene();
         });
 
         endGamePanel.transform.Find("MainMenuButton").GetComponent<Button>().onClick.AddListener(() =>
         {
-            // retirar esses resumes
-            gameStateManager.ResumeGame();
+            GameStateManager.ResumeGame();
             SceneLoader.LoadMainMenu();
         });
     }

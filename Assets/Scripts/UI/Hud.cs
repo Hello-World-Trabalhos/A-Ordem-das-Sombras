@@ -4,7 +4,6 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour
 {
     private readonly AudioConfig audioConfig = new AudioConfig();
-    private readonly GameStateManager gameStateManager = new GameStateManager();
     private GameObject hud;
     private GameObject pauseMenu;
     private GameObject initialMenu;
@@ -23,20 +22,20 @@ public class Hud : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        gameStateManager.ResumeGame();
+        GameStateManager.ResumeGame();
         SceneLoader.LoadMainMenu();
     }
 
     public void OpenPauseMenu()
     {
-        gameStateManager.PauseGame();
+        GameStateManager.PauseGame();
         pauseMenu.SetActive(true);
         hud.SetActive(false);
     }
 
     public void ClosePauseMenu()
     {
-        gameStateManager.ResumeGame();
+        GameStateManager.ResumeGame();
         pauseMenu.SetActive(false);
         hud.SetActive(true);
     }
