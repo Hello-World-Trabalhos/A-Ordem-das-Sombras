@@ -3266,7 +3266,7 @@ GameObject:
   - component: {fileID: 7922439533688930849}
   m_Layer: 0
   m_Name: UserInterface
-  m_TagString: Untagged
+  m_TagString: Hud
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
