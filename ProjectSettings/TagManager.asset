@@ -18,6 +18,10 @@ TagManager:
   - InteriorTemplate
   - PlayerSpawn
   - ClosedRoom
+  - Enemy
+  - RoomData
+  - Passage
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -25,9 +29,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - Player
+  - Boss
   - 
   - 
   - 

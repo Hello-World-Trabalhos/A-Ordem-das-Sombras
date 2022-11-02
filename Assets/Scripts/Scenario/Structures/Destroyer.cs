@@ -16,6 +16,10 @@ public class Destroyer : MonoBehaviour
             case "Wall":
                 Destroy(other.transform.parent.gameObject);
                 break;
+
+            case "Destroyer":
+                Destroy(other.transform.parent.parent.gameObject);
+                break;
         }
     }
 }

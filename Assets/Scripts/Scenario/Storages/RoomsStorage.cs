@@ -1,43 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class RoomsStorage : MonoBehaviour
 {
-    private GameObject[] spawnedRooms;
+    private GameObject[] allSpawnedRooms;
+    private List<GameObject> noComplementarySpawnedRooms = new List<GameObject>();
 
-    public void CollectAllSpawnedRooms()
+    private void CollectAllSpawnedRooms()
     {
-        spawnedRooms = GameObject.FindGameObjectsWithTag("Room");
+        allSpawnedRooms = GameObject.FindGameObjectsWithTag("Room");
     }
 
-    public GameObject[] GetSpawnedRooms()
+    public void AddToNoComplementaryRoomsList(GameObject room)
     {
-        if (spawnedRooms == null)
+        noComplementarySpawnedRooms.Add(room);
+    }
+
+    public List<GameObject> GetAllNoComplementaryRooms()
+    {
+        return noComplementarySpawnedRooms;
+    }
+
+    public GameObject[] GetAllSpawnedRooms()
+    {
+        if (allSpawnedRooms == null)
         {
             CollectAllSpawnedRooms();
         }
 
-        return spawnedRooms;
-    }
-
-    public GameObject GetPlayerRoom()
-    {
-        if (spawnedRooms == null)
-        {
-            CollectAllSpawnedRooms();
-        }
-        
-        return spawnedRooms[0];
-    }
-
-    public GameObject GetBossRoom()
-    {
-        if (spawnedRooms == null)
-        {
-            CollectAllSpawnedRooms();
-        }
-        
-        return spawnedRooms[spawnedRooms.Length - 1];
+        return allSpawnedRooms;
     }
 }

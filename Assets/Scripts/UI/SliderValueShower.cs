@@ -14,8 +14,8 @@ public class SliderValueShower : MonoBehaviour
         enemySliderCount = gameObject.transform.Find("EnemiesSliderCount").GetComponent<Text>();
         enemySlider = gameObject.transform.Find("EnemySlider").GetComponent<Slider>();
 
-        enemySlider.minValue = ScenarioGeneratiorViewerConstants.MIN_ENEMIES_AMMOUNT;
-        enemySlider.maxValue = ScenarioGeneratiorViewerConstants.MAX_ENEMIES_AMMOUNT;
+        enemySlider.minValue = ScenarioGenerationViewerConstants.MIN_ENEMIES_AMMOUNT;
+        enemySlider.maxValue = ScenarioGenerationViewerConstants.MAX_ENEMIES_AMMOUNT;
     }
 
     public void UpdateEnemySliderCount(float sliderValue)

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ScenarioGenerationViewerHud : MonoBehaviour
 {
-    private readonly GameStateManager gameStateManager = new GameStateManager();
     private Button pauseButton;
     private Button scenarioGeneratorButton;
     private Button scenarioGenerationSettings;
@@ -25,7 +24,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void PauseGame()
     {
-        gameStateManager.PauseGame();
+        GameStateManager.PauseGame();
         pauseButton.gameObject.SetActive(false);
         scenarioGeneratorButton.gameObject.SetActive(false);
         scenarioGenerationSettings.gameObject.SetActive(false);
@@ -35,7 +34,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void ResumeGame()
     {
-        gameStateManager.ResumeGame();
+        GameStateManager.ResumeGame();
         pauseButton.gameObject.SetActive(true);
         scenarioGeneratorButton.gameObject.SetActive(true);
         scenarioGenerationSettings.gameObject.SetActive(true);
@@ -46,7 +45,7 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void OpenConfigPanel()
     {
-        gameStateManager.PauseGame();
+        GameStateManager.PauseGame();
         pauseButton.gameObject.SetActive(false);
         scenarioGeneratorButton.gameObject.SetActive(false);
         scenarioGenerationSettings.gameObject.SetActive(false);
@@ -84,13 +83,13 @@ public class ScenarioGenerationViewerHud : MonoBehaviour
 
     public void GenerateNewScenario()
     {
-        gameStateManager.ResumeGame();
+        GameStateManager.ResumeGame();
         SceneLoader.ReloadCurrentScene();
     }
 
     public void LoadMainMenu()
     {
-        gameStateManager.ResumeGame();
+        GameStateManager.ResumeGame();
         SceneLoader.LoadMainMenu();
     }
 }

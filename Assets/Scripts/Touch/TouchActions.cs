@@ -43,9 +43,9 @@ public class TouchActions : MonoBehaviour
     private void FixCameraPositionUnderLimits()
     {
         Camera.main.transform.position = new Vector3(
-            Mathf.Clamp(Camera.main.transform.position.x, ScenarioGeneratiorViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MAX_X_CAMERA_AXIS),
-            Mathf.Clamp(Camera.main.transform.position.y, ScenarioGeneratiorViewerConstants.MIN_Y_CAMERA_AXIS, ScenarioGeneratiorViewerConstants.MAX_Y_CAMERA_AXIS),
-            ScenarioGeneratiorViewerConstants.Z_CAMERA_AXIS
+            Mathf.Clamp(Camera.main.transform.position.x, ScenarioGenerationViewerConstants.MIN_X_CAMERA_AXIS, ScenarioGenerationViewerConstants.MAX_X_CAMERA_AXIS),
+            Mathf.Clamp(Camera.main.transform.position.y, ScenarioGenerationViewerConstants.MIN_Y_CAMERA_AXIS, ScenarioGenerationViewerConstants.MAX_Y_CAMERA_AXIS),
+            ScenarioGenerationViewerConstants.Z_CAMERA_AXIS
         );
     }
 
@@ -62,7 +62,7 @@ public class TouchActions : MonoBehaviour
             float touchesPreviousPositionsDifference = (firstTouchPreviousPosition - secondTouchPreviousPosition).magnitude;
             float touchesCurrentPositionsDifference = (firstTouch.position - secondTouch.position).magnitude;
 
-            float zoomModifier = (firstTouch.deltaPosition - secondTouch.deltaPosition).magnitude * ScenarioGeneratiorViewerConstants.CAMERA_ZOOM_SPEED;
+            float zoomModifier = (firstTouch.deltaPosition - secondTouch.deltaPosition).magnitude * ScenarioGenerationViewerConstants.CAMERA_ZOOM_SPEED;
 
             if (touchesPreviousPositionsDifference > touchesCurrentPositionsDifference)
             {
@@ -82,8 +82,8 @@ public class TouchActions : MonoBehaviour
     {
         Camera.main.orthographicSize = Mathf.Clamp(
             Camera.main.orthographicSize,
-            ScenarioGeneratiorViewerConstants.MIN_CAMERA_ZOOM,
-            ScenarioGeneratiorViewerConstants.MAX_CAMERA_ZOOM
+            ScenarioGenerationViewerConstants.MIN_CAMERA_ZOOM,
+            ScenarioGenerationViewerConstants.MAX_CAMERA_ZOOM
         );
     }
 }

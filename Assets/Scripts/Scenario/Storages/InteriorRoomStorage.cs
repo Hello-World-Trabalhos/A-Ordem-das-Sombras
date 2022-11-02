@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InteriorRoomStorage : MonoBehaviour
 {
 
+    private RoomsStorage roomsStorage;
     private GameObject[] spawnedInteriorRooms;
+    private GameObject bossInteriorRoom;
+
+    void Start()
+    {
+        roomsStorage = GameObject.Find("RoomsStorage").GetComponent<RoomsStorage>();
+    }
 
     public void CollectAllSpawnedInteriorTemplates()
     {
@@ -28,17 +36,29 @@ public class InteriorRoomStorage : MonoBehaviour
         {
             CollectAllSpawnedInteriorTemplates();
         }
-        
+
         return spawnedInteriorRooms[0];
     }
 
     public GameObject GetBossInteriorRoom()
     {
-        if (spawnedInteriorRooms == null)
+        if (bossInteriorRoom == null)
         {
-            CollectAllSpawnedInteriorTemplates();
+            GameObject lastSpawnedRoom = roomsStorage.GetAllNoComplementaryRooms().Last();
+            int childNumber = lastSpawnedRoom.transform.childCount;
+
+            for (int i = 0; i < childNumber; i++)
+            {
+                GameObject child = lastSpawnedRoom.transform.GetChild(i).gameObject;
+
+                if (child.tag == "InteriorTemplate")
+                {
+                    bossInteriorRoom = child;
+                    break;
+                }
+            }
         }
-        
-        return spawnedInteriorRooms[spawnedInteriorRooms.Length - 1];
+
+        return bossInteriorRoom;
     }
 }

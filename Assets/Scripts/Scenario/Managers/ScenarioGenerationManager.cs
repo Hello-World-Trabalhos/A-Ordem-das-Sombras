@@ -6,17 +6,15 @@ using UnityEngine;
 public class ScenarioGenerationManager : MonoBehaviour
 {
 
-    private RoomsStorage roomsStorage;
     private InteriorRoomSpawner interiorRoomSpawner;
-    private InteriorRoomStorage interiorRoomStorage;
     private ObstacleSpawner obstacleSpawner;
     private EnemySpawner enemySpawner;
     private BossSpawner bossSpawner;
     private PlayerSpawner playerSpawner;
     private RoomSpawnWait roomSpawnWait;
 
-    private ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
-    private TimeUtils timeUtils = new TimeUtils();
+    private readonly ScenarioOptmizer scenarioOptmizer = new ScenarioOptmizer();
+    private readonly RoomSpawnFixer roomSpawnFixer = new RoomSpawnFixer();
 
 
     void Start()
@@ -25,9 +23,7 @@ public class ScenarioGenerationManager : MonoBehaviour
         roomSpawnWait.ResetTimeToWaitRoomsSpawn();
         StartCoroutine(WaitAllRoomsBeSpawned());
 
-        roomsStorage = GameObject.Find("RoomsStorage").GetComponent<RoomsStorage>();
         interiorRoomSpawner = GameObject.Find("InteriorRoomSpawner").GetComponent<InteriorRoomSpawner>();
-        interiorRoomStorage = GameObject.Find("InteriorRoomStorage").GetComponent<InteriorRoomStorage>();
         obstacleSpawner = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>();
         enemySpawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
         bossSpawner = GameObject.Find("BossSpawner").GetComponent<BossSpawner>();
@@ -47,6 +43,7 @@ public class ScenarioGenerationManager : MonoBehaviour
 
     private void PrepareScenario()
     {
+        roomSpawnFixer.ReplaceClosedRoomsForComplementaryRooms();
         interiorRoomSpawner.SpawnInteriorRoomsTemplates();
         obstacleSpawner.SpawnObstacles();
         enemySpawner.SpawnEnemies();

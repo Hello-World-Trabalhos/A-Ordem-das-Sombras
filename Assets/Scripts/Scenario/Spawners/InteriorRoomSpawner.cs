@@ -16,7 +16,7 @@ public class InteriorRoomSpawner : MonoBehaviour
 
     public void SpawnInteriorRoomsTemplates()
     {
-        GameObject[] rooms = roomsStorage.GetSpawnedRooms();
+        GameObject[] rooms = roomsStorage.GetAllSpawnedRooms();
 
         for (int i = 0; i < rooms.Length; i++)
         {
@@ -27,7 +27,8 @@ public class InteriorRoomSpawner : MonoBehaviour
 
             Quaternion rotation = choosedInteriorRoomTemplate.transform.rotation;
 
-            Instantiate(choosedInteriorRoomTemplate, roomCenter, rotation);
+            GameObject interiorRoomInstance = Instantiate(choosedInteriorRoomTemplate, roomCenter, rotation);
+            interiorRoomInstance.transform.SetParent(rooms[i].transform);
         }
     }
 }

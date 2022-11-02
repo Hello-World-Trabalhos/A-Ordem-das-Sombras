@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
 public class RoomSpawner : MonoBehaviour
 {
 
-    public enum Direction
-    {
-        TOP, LEFT, BOTTOM, RIGHT
-    }
-
+    private static readonly RoomSpawnChecker roomSpawnChecker = new RoomSpawnChecker();
+    private static Dictionary<Direction, GameObject[]> directionsRoomTemplates;
+    private static RoomsStorage roomsStorage;
     private static RoomTemplates roomTemplates;
     private static RoomSpawnWait roomSpawnWait;
 
@@ -19,9 +18,19 @@ public class RoomSpawner : MonoBehaviour
 
     void Start()
     {
-        if (roomTemplates == null)
+        if (roomTemplates == null || directionsRoomTemplates == null)
         {
             roomTemplates = GameObject.FindGameObjectWithTag("RoomTemplates").GetComponent<RoomTemplates>();
+            directionsRoomTemplates = new Dictionary<Direction, GameObject[]>();
+            directionsRoomTemplates.Add(Direction.TOP, roomTemplates.topRooms);
+            directionsRoomTemplates.Add(Direction.LEFT, roomTemplates.leftRooms);
+            directionsRoomTemplates.Add(Direction.BOTTOM, roomTemplates.bottomRooms);
+            directionsRoomTemplates.Add(Direction.RIGHT, roomTemplates.rightRooms);
+        }
+
+        if (roomsStorage == null)
+        {
+            roomsStorage = GameObject.Find("RoomsStorage").GetComponent<RoomsStorage>();
         }
 
         if (roomSpawnWait == null)
@@ -42,31 +51,25 @@ public class RoomSpawner : MonoBehaviour
 
         if (!isSpawned)
         {
-            int randomIndex;
-            GameObject choosedRoomTemplate = null;
-
-            switch (roomConnectedDoorDirection)
+            List<Direction> blockedDirections = roomSpawnChecker.GetBlockedDirections(gameObject.transform.position);
+            List<GameObject> choosedRoomTemplateArrayCopiedAsList = directionsRoomTemplates[roomConnectedDoorDirection].ToList();
+            List<GameObject> choosedRoomtemplatesListFiltered = choosedRoomTemplateArrayCopiedAsList.FindAll(roomTemplate =>
             {
-                case Direction.TOP:
-                    randomIndex = Random.Range(0, roomTemplates.topRooms.Length);
-                    choosedRoomTemplate = roomTemplates.topRooms[randomIndex];
-                    break;
+                OpenedDirectionsData roomOpenedDirectionsData = roomTemplate.transform.Find("Data").GetComponent<OpenedDirectionsData>();
 
-                case Direction.LEFT:
-                    randomIndex = Random.Range(0, roomTemplates.leftRooms.Length);
-                    choosedRoomTemplate = roomTemplates.leftRooms[randomIndex];
-                    break;
+                foreach (Direction direction in roomOpenedDirectionsData.openedDirections)
+                {
+                    if (blockedDirections.Contains(direction))
+                    {
+                        return false;
+                    }
+                }
 
-                case Direction.BOTTOM:
-                    randomIndex = Random.Range(0, roomTemplates.bottomRooms.Length);
-                    choosedRoomTemplate = roomTemplates.bottomRooms[randomIndex];
-                    break;
+                return true;
+            });
 
-                case Direction.RIGHT:
-                    randomIndex = Random.Range(0, roomTemplates.rightRooms.Length);
-                    choosedRoomTemplate = roomTemplates.rightRooms[randomIndex];
-                    break;
-            }
+            int randomIndex = Random.Range(0, choosedRoomtemplatesListFiltered.Count);
+            GameObject choosedRoomTemplate = choosedRoomtemplatesListFiltered[randomIndex];
 
             float x = transform.position.x + ScenarioConstants.X_SPAWN_MARGIN_OF_ERROR;
             float y = transform.position.y + ScenarioConstants.Y_SPAWN_MARGIN_OF_ERROR;
@@ -75,7 +78,8 @@ public class RoomSpawner : MonoBehaviour
             Vector3 position = new Vector3(x, y, z);
             Quaternion rotation = choosedRoomTemplate.transform.rotation;
 
-            Instantiate(choosedRoomTemplate, position, rotation);
+            GameObject roomInstance = Instantiate(choosedRoomTemplate, position, rotation);
+            roomsStorage.AddToNoComplementaryRoomsList(roomInstance);
 
             isSpawned = true;
         }

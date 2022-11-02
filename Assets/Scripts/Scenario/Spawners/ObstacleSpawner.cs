@@ -5,12 +5,10 @@ using UnityEngine;
 public class ObstacleSpawner : MonoBehaviour
 {
     private ObstacleModels obstacleModelsReference;
-    private InteriorRoomStorage interiorRoomsStorage;
 
     void Start()
     {
         obstacleModelsReference = GameObject.Find("ObstacleModels").GetComponent<ObstacleModels>();
-        interiorRoomsStorage = GameObject.Find("InteriorRoomStorage").GetComponent<InteriorRoomStorage>();
     }
 
     public void SpawnObstacles()

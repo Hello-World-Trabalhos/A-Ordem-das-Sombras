@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class GameStateManager
 {
-    public void PauseGame()
+    public static void PauseGame()
     {
         Time.timeScale = 0;
     }
 
-    public void ResumeGame()
+    public static void ResumeGame()
     {
         Time.timeScale = 1;
     }

@@ -26,6 +26,6 @@ public class PlayerSpawner : MonoBehaviour
     public void SpawnPlayerWithoutScript()
     {
         SpawnPlayer();
-        Destroy(spawnedPlayerReference.GetComponent<PlayerController>());
+        new GameObjectUtils().DestroyAllScriptsInObject(spawnedPlayerReference);
     }
 }

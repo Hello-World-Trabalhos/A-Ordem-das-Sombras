@@ -1,28 +1,47 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Player))]
 public class PlayerController : MonoBehaviour
 {
+    public Player player;
     public Animator playerAnimator;
     FixedJoystick fixedJoystick;
     float input_x = 0;
     float input_y = 0;
-    public float speed = 2.5f;
+    //public float speed = 2.5f;
     bool isWalking = false;
     SpriteRenderer sr;
     Rigidbody2D rb2;
     Vector2 movement = Vector2.zero;
+    public Button btnAttack;
 
-    // Start is called before the first frame update
     void Start()
     {
+        GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")
+            .transform.Find("Hud").gameObject;
+
+        btnAttack = hud.transform.Find("Attack").GetComponent<Button>();
+
+        btnAttack.onClick.AddListener(() => AtackPlayer());
+
         isWalking = false;
         fixedJoystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<FixedJoystick>();
         sr = GetComponent<SpriteRenderer>();
 
         rb2 = GetComponent<Rigidbody2D>();
+        player = GetComponent<Player>();
+
+        //camera
+        Vector3 newCamaraPosition = new Vector3();
+        newCamaraPosition.x = gameObject.transform.position.x;
+        newCamaraPosition.y = gameObject.transform.position.y;
+        newCamaraPosition.z = ScenarioGenerationViewerConstants.Z_CAMERA_AXIS;
+        Camera.main.transform.position = newCamaraPosition;
+        Camera.main.transform.SetParent(gameObject.transform);
     }
 
     // Update is called once per frame
@@ -32,12 +51,12 @@ public class PlayerController : MonoBehaviour
             MovePlayer();
         }
 
-        AtackPlayer();
+        //AtackPlayer();
     }
 
     void MovePlayer()
     {
-        //pegando os comandos de movimentação pelo teclado
+        //pegando os comandos de movimentaï¿½ï¿½o pelo teclado
         //input_x = Input.GetAxisRaw("Horizontal");
         //input_y = Input.GetAxisRaw("Vertical");
 
@@ -53,7 +72,7 @@ public class PlayerController : MonoBehaviour
             //var move = new Vector3(input_x, input_y, 0).normalized;
             //transform.position += move * speed * Time.deltaTime;
 
-            //movendo a animação de run_right para a run_left
+            //movendo a animaï¿½ï¿½o de run_right para a run_left
             if (input_x < 0)
             {
                 sr.flipX = true;
@@ -62,23 +81,61 @@ public class PlayerController : MonoBehaviour
             {
                 sr.flipX = false;
             }
-            //controlhando as animações
+            //controlhando as animaï¿½ï¿½es
             playerAnimator.SetFloat("input_x", input_x);
             playerAnimator.SetFloat("input_y", input_y);
         }
         playerAnimator.SetBool("isWalking", isWalking);
     }
 
-    void AtackPlayer()
+    public void AtackPlayer()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            playerAnimator.SetTrigger("attack");
-        }
+        playerAnimator.SetTrigger("attack");
+        player.entity.attackTimer = player.entity.coolDown;
+        Attack();
+
     }
 
     private void FixedUpdate()
     {
-        rb2.MovePosition(rb2.position + movement * speed * Time.fixedDeltaTime);
+        rb2.MovePosition(rb2.position + movement * player.entity.speed * Time.fixedDeltaTime);
+    }
+
+    void Attack()
+    {
+        if (player.entity.target == null)
+            return;
+
+        Skeleton skeleton = player.entity.target.GetComponent<Skeleton>();
+
+        if (skeleton.entity.isDead)
+        {
+            player.entity.target = null;
+            return;
+        }
+
+        float distance = Vector2.Distance(transform.position, player.entity.target.transform.position);
+
+        if (distance <= player.entity.attackDistance)
+        {
+            int dmg = player.entity.damage;
+            int enemyDef = player.entity.defence;
+            int result = dmg - enemyDef;
+
+            if (result < 0)
+                result = 0;
+
+            skeleton.entity.currentHealth -= result;
+            skeleton.entity.target = this.transform;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collider)
+    {
+        if(collider.transform.tag == "Enemy")
+        {
+            player.entity.target = collider.transform;
+            Attack();
+        }
     }
 }
