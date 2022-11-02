@@ -1,4 +1,4 @@
-<h1 align="center">TC-Rogue-like</h1>
+<h1 align="center">A Ordem das Sombras</h1>
 <h4 align="center">Trabalho de Curso de Ciência da Computação</h4>
 
 ***
