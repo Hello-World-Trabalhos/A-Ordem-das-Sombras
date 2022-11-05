@@ -15,9 +15,11 @@ O jogo está presente na Play Store para download, o link é <... link aqui quan
 
 ## Baixando o projeto :arrow_down:
 
-breve texto sobre como utilizar;
+Para a utilização do projeto, seja para visualização, extensão ou aprimoramentos, faça um fork desse projeto e 
+então realize quaisquer alterações que desejar em seu repositório próprio.
 
-  - apontar para o doc que irá explicar isso
+Porém, é preciso se atentar em algumas configurações e validações necessárias para que não haja problemas nesse 
+momento, siga [esse documento](.docs/utilization/Configuration.md) para maiores detalhes.
 
 ***
 
