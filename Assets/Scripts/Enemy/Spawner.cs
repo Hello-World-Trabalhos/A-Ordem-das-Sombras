@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        spawnerPrefab = GameObject.Find("Boss").transform.Find("Hit").transform;
+        spawnerPrefab = GameObject.FindGameObjectWithTag("Boss").transform.Find("Hit").transform;
     }
 
     // Update is called once per frame
