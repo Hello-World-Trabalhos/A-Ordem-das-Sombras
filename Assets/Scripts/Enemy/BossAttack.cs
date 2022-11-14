@@ -27,7 +27,7 @@ public class BossAttack : MonoBehaviour
         Vector2 offset = new Vector2(target.x - bossPoint.x, target.y - bossPoint.y);
 
         move.x = offset.x * speed * Time.deltaTime;
-        move.y = offset.y * speed * Time.deltaTime;
+        move.y = (offset.y - 1) * speed * Time.deltaTime;
 
         transform.position += move;
     }
