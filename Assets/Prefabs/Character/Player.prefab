@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc84ba48e5613b4cabcbf9957921e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShowDraw: 0
+  isShowDraw: 1
   activeTimer: 0.1
   pointDetection: {fileID: 1147305688491304965}
   layerMask:

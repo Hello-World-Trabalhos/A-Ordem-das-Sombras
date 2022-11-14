@@ -20,17 +20,28 @@ public class Boss : Caracter
     [SerializeField] private Detection detection;
     [SerializeField] private float waitAttack = 0.5f;
     [SerializeField] private float waitAttackFinish = 0.5f;
+    [SerializeField] private Spawner spawner;
     private float timerAttack;
     private float timerAttackFinish;
+    [SerializeField] public float shootTimer = 0.5f;
+    private float nextShootTimer;
+    //private GameObject spawnerPrefab;
+
 
     [Header("Die")]
     public float timeLoader = 1.5f;
+    private EndGameManager gameManager;
 
     void Start()
     {
         SetTarget();
         rb2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        gameManager = GameObject.Find("EndGameManager").GetComponent<EndGameManager>();
+
+        //spawnerPrefab = GameObject.Find("Boss").transform.Find("Hit").gameObject;
+
     }
 
     void Update()
@@ -76,12 +87,27 @@ public class Boss : Caracter
         return false;
     }
 
+
+    private void Shoot()
+    {
+        nextShootTimer = Time.time + shootTimer;
+        spawner.Shoot(entity.target.position.x, entity.target.position.y,transform);
+    }
+
+    private void HandleShoot()
+    {
+        if (Time.time > nextShootTimer)
+        {
+            Shoot();
+        }
+    }
     private void Attack()
     {
         if ((Vector3.Distance(transform.position, entity.target.position) < startDistance))
         {
             timerAttackFinish = Time.time + waitAttackFinish;
             timerAttack = Time.time + waitAttack;
+            HandleShoot();
             animator.SetBool("attack", true);
         }
 
@@ -106,7 +132,7 @@ public class Boss : Caracter
         entity.target = null;
 
         animator.SetBool("isWalking", false);
-        SceneLoader.LoadMainMenu();
+        gameManager.ShowEndGamePanel(EndGameOption.BOSS_KILLED);
         Invoke("DestroyEnemy", timeLoader);
 
     }

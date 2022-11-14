@@ -32,9 +32,12 @@ public class Player : MonoBehaviour
     //private float timer;
     //private bool canDamage = true;
     public float timeLoader = 1.5f;
+    private EndGameManager gameManager;
 
     void Start()
     {
+        gameManager = GameObject.Find("EndGameManager").GetComponent<EndGameManager>();
+
         GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")
             .transform.Find("Hud").gameObject;
         btnPotion = hud.transform.Find("Potion").GetComponent<Button>();
@@ -124,8 +127,7 @@ public class Player : MonoBehaviour
 
     public void DestroyPlayer()
     {
-        //Destroy(gameObject);
-        SceneLoader.LoadMainMenu();
+        gameManager.ShowEndGamePanel(EndGameOption.PLAYER_DEAD);
     }
 
     public void TakeDamage(int damage)
