@@ -5,6 +5,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private GameObject prefab;
     [SerializeField] public Transform spawnerPrefab;
 
+
     void Start()
     {
         spawnerPrefab = GameObject.FindGameObjectWithTag("Boss").transform.Find("Hit").transform;

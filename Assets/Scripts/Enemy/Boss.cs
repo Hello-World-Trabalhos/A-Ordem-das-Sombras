@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,13 +19,14 @@ public class Boss : Caracter
 
     [Header("Attack")]
     [SerializeField] private Detection detection;
-    [SerializeField] private float waitAttack = 0.5f;
-    [SerializeField] private float waitAttackFinish = 0.5f;
     [SerializeField] private Spawner spawner;
-    private float timerAttack;
-    private float timerAttackFinish;
+    [SerializeField] private float waitAttackFinish = 3f;
+    private float waitAttack;
+    [SerializeField] private float timerAttackFinish = 5f;
+    private float timerAttack;   
     [SerializeField] public float shootTimer = 0.5f;
     private float nextShootTimer;
+    private bool isAttack = true;
     //private GameObject spawnerPrefab;
 
 
@@ -39,8 +41,8 @@ public class Boss : Caracter
         animator = GetComponent<Animator>();
 
         gameManager = GameObject.Find("EndGameManager").GetComponent<EndGameManager>();
-
-        //spawnerPrefab = GameObject.Find("Boss").transform.Find("Hit").gameObject;
+        waitAttack = Time.time + waitAttackFinish;
+        timerAttack = Time.time + timerAttackFinish;
 
     }
 
@@ -64,8 +66,7 @@ public class Boss : Caracter
 
         if (Distance())
         {
-            //animator.SetBool("attack", true);
-            FinishAttack();
+            //FinishAttack();
             Attack();
         }
     }
@@ -105,16 +106,34 @@ public class Boss : Caracter
     {
         if ((Vector3.Distance(transform.position, entity.target.position) < startDistance))
         {
-            timerAttackFinish = Time.time + waitAttackFinish;
-            timerAttack = Time.time + waitAttack;
-            HandleShoot();
-            animator.SetBool("attack", true);
+            //timerAttackFinish = Time.time + waitAttackFinish;
+            //timerAttack = Time.time + waitAttack;
+            if (isAttack)
+            {
+                HandleShoot();
+                animator.SetBool("attack", true);
+                if (Time.time > timerAttack)
+                {
+                    isAttack = false;
+                    waitAttack = Time.time + waitAttackFinish;
+                }
+            }
+            else
+            {
+                if (Time.time > waitAttack)
+                {
+                    isAttack = true;
+                    timerAttack = Time.time + timerAttackFinish;
+                }
+            }
         }
 
     }
 
     private void FinishAttack()
     {
+        Debug.Log("Time.time: " + Time.time);
+        Debug.Log("timerAttackFinish: " + timerAttackFinish);
         if (Time.time > timerAttackFinish)
         {
             animator.SetBool("attack", false);

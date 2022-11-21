@@ -18,6 +18,7 @@ public class Entity
     [Header("Experience")]
     public int currentXP;
     public int maxXP;
+    public AudioSource entityAudio;
 
     [Header("Stats")]
     public int strength = 1;
@@ -26,6 +27,7 @@ public class Entity
     public int defence;
     //public float radius;
     public float speed;
+
 
     [Header("Combat")]
     public float attackDistance = 0.5f;

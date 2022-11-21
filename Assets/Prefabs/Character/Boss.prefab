@@ -670,10 +670,10 @@ MonoBehaviour:
   stopDistance: 1
   startDistance: 5
   detection: {fileID: 0}
-  waitAttack: 0.5
-  waitAttackFinish: 0.5
   spawner: {fileID: 1230847749986535498}
-  shootTimer: 0.5
+  waitAttackFinish: 4
+  timerAttackFinish: 5
+  shootTimer: 1
   timeLoader: 1
 --- !u!114 &4496321563964411607
 MonoBehaviour:

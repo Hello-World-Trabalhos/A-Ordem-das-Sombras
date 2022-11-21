@@ -23,6 +23,7 @@ TagManager:
   - Passage
   - Boss
   - BossAttack
+  - ObstacleObject
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Enemy
   - Player
   - Boss
-  - 
+  - Obstacle
   - 
   - 
   - 
