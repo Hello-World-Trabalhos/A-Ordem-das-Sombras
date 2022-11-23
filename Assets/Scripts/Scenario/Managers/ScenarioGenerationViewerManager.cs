@@ -58,7 +58,7 @@ public class ScenarioGenerationViewerManager : MonoBehaviour
 
         if (scenarioGenerationConfig.IsBossGenerationEnabled())
         {
-            bossSpawner.SpawnBoss();
+            bossSpawner.SpawnBossWithoutScripts();
         }
 
         if (scenarioGenerationConfig.IsPlayerGenerationEnabled())

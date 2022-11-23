@@ -6,6 +6,7 @@ public class BossSpawner : MonoBehaviour
 {
     private BossModels bossModels;
     private InteriorRoomStorage interiorRoomStorage;
+    private GameObject spawnedBossReference;
 
     void Start()
     {
@@ -18,9 +19,15 @@ public class BossSpawner : MonoBehaviour
         GameObject spawn = interiorRoomStorage.GetBossInteriorRoom().transform.Find("BossSpawns").transform.GetChild(0).gameObject;
         Vector3 spawnPosition = spawn.transform.position;
         Vector3 positionToSpawn = new Vector3(spawnPosition.x, spawnPosition.y, 0);
-        
+
         GameObject bossModel = bossModels.bossModels[Random.Range(0, bossModels.bossModels.Length)];
 
-        Instantiate(bossModel, positionToSpawn, Quaternion.identity);
+        spawnedBossReference = Instantiate(bossModel, positionToSpawn, Quaternion.identity);
+    }
+
+    public void SpawnBossWithoutScripts()
+    {
+        SpawnBoss();
+        new GameObjectUtils().DestroyAllScriptsInObject(spawnedBossReference);
     }
 }

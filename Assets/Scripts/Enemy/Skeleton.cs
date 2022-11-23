@@ -172,34 +172,4 @@ public class Skeleton : Caracter
         animator.SetBool("isWalking", false);
         Invoke("DestroyEnemy", timeLoader);
     }
-    /*
-IEnumerator Attack1()
-{
-   entity.combatCoroutine = true;
-
-   while (true)
-   {
-       yield return new WaitForSeconds(entity.coolDown);
-
-       if (entity.target != null && !entity.target.GetComponent<Player>().entity.isDead)
-       {
-           animator.SetBool("attack", true);
-
-           float distance = Vector2.Distance(entity.target.transform.position, transform.position);
-
-           if (distance <= entity.attackDistance)
-           {
-               int dmg = entity.damage;
-               int targetDef = entity.defence;
-               int dmgResult = dmg - targetDef;
-
-               if (dmgResult < 0)
-                   dmgResult = 0;
-
-               // subtraindo a vida do player
-               entity.target.GetComponent<Player>().entity.currentHealth -= dmgResult;
-           }
-       }
-   }
-}*/
 }

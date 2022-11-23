@@ -3,35 +3,38 @@
 
 ***
 
-## Sobre
+## Sobre :information_source:
 
-texto aqui sobre o projeto
-  - o que é
-  - tema
-  - o que foi feito (jogo, rogue like, geracao procedural)
-  - algumas imagens e artes do jogo (talvez) (arquivo separado)
-  - link play store
+O projeto consiste em um Trabalho de Curso de Ciência da Computação e tem como temática a geração de cenários 
+procedurais em jogos. Foi desenvolvido um jogo no gênero Rogue-like os quais geralmente aplicam o conceito de 
+geração aleatória de cenários a cada vez que o jogo inicia.
 
-***
-
-## Baixando o projeto
-
-breve texto sobre como utilizar;
-
-  - apontar para o doc que irá explicar isso
+O jogo está presente na Play Store para download, o link é <... link aqui quando subir...>
 
 ***
 
-## Integrantes
+## Baixando o projeto :arrow_down:
 
-texto sobre integrantes;
+Para a utilização do projeto, seja para visualização, extensão ou aprimoramentos, faça um fork desse projeto e 
+então realize quaisquer alterações que desejar em seu repositório próprio.
 
-- foto
-  - linkedin
-  - github se tiver
+Porém, é preciso se atentar em algumas configurações e validações necessárias para que não haja problemas nesse 
+momento, siga [esse documento](.docs/utilization/Configuration.md) para maiores detalhes.
 
 ***
 
-## Agradecimentos
+## Integrantes :sunglasses:
 
-texto sobre agradecimentos;
+Os integrantes do grupo que desenvolveu esse projeto são:
+ - [Henrique Neves](https://www.linkedin.com/in/henrique-neves-3213he/)
+ - [Lucas Santos](https://www.linkedin.com/in/lucas-silva-santos-dev)
+ - [Michael Toninger](https://www.linkedin.com/in/michael-toninger-polidoro-925977193/)
+ - [Murilo Lucas](https://www.linkedin.com/in/murilolucas/)
+ - [Vinícius Correia](https://www.linkedin.com/in/vinicius-souza-033086157/)
+
+***
+
+## Agradecimentos :pray:
+
+Ao concluírmos essa etapa, nada mais justo do que agradecer Deus, familiares, amigos, nossa orientadora pelo 
+incentivo e dedicação, além de todos que participaram direta e indiretamente para finalização desse projeto.

@@ -31,10 +31,20 @@ public class Player : MonoBehaviour
 
     //private float timer;
     //private bool canDamage = true;
-    public float timeLoader = 1.5f;
+    [SerializeField] private float timeLoader = 1.5f;
+    private EndGameManager gameManager;
+
+    [Header("Damage")]
+    private SpriteRenderer sprite;
+    [SerializeField] private int spriteEnabledQty = 7;
+    [SerializeField] private float damageColorTimer = 0.2f;
+    [SerializeField] private float damageEnabledTimer = 0.15f;
+
 
     void Start()
     {
+        gameManager = GameObject.Find("EndGameManager").GetComponent<EndGameManager>();
+
         GameObject hud = GameObject.Find("UserInterface").transform.Find("Canvas")
             .transform.Find("Hud").gameObject;
         btnPotion = hud.transform.Find("Potion").GetComponent<Button>();
@@ -50,6 +60,9 @@ public class Player : MonoBehaviour
         entity.currentXP = 1;
         xpSliper.maxValue = entity.maxXP;
         xpSliper.value = 1 ;
+
+        //para o vermelho do dano
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Awake()
@@ -103,8 +116,8 @@ public class Player : MonoBehaviour
     {
         entity.currentHealth = entity.maxHealth;
 
-        //entity.entityAudio.PlayOneShot(regenerationSound);
-        //Instantiate(regenerationFx, this.gameObject.transform); //.Find("RegenerationSound")
+        entity.entityAudio.PlayOneShot(regenerationSound);
+        //Instantiate(regenerationFx,this.gameObject.transform);
     }
 
     public void Die()
@@ -124,8 +137,7 @@ public class Player : MonoBehaviour
 
     public void DestroyPlayer()
     {
-        //Destroy(gameObject);
-        SceneLoader.LoadMainMenu();
+        gameManager.ShowEndGamePanel(EndGameOption.PLAYER_DEAD);
     }
 
     public void TakeDamage(int damage)
@@ -135,9 +147,23 @@ public class Player : MonoBehaviour
 
         entity.currentHealth -= damage;
         hpSliper.value -= damage;
-
+        StartCoroutine(Hurt());
     }
 
+    private IEnumerator Hurt()
+    {
+        sprite.color = new Color(1f, 0, 0, 1f);
+        yield return new WaitForSeconds(damageColorTimer);
+        sprite.color = new Color(1f, 1f, 1f, 1f);
+
+        for (int i = 0; i < spriteEnabledQty; i++)
+        {
+            sprite.enabled = false;
+            yield return new WaitForSeconds(damageEnabledTimer);
+            sprite.enabled = true;
+            yield return new WaitForSeconds(damageEnabledTimer);
+        }
+    }
     #region Detection
     /*
     private void ActiveAttack()

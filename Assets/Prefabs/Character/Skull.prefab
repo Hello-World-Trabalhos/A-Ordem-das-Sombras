@@ -49,7 +49,7 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 128
-  radius: 2
+  radius: 1.05
   damage: 40
 --- !u!1 &5542771433806368494
 GameObject:
@@ -259,7 +259,7 @@ MonoBehaviour:
   detection: {fileID: 2698886390549289649}
   waitAttack: 1
   waitAttackFinish: 0.5
-  timeLoader: 1.5
+  timeLoader: 1
 --- !u!114 &6192071316756807262
 MonoBehaviour:
   m_ObjectHideFlags: 0
