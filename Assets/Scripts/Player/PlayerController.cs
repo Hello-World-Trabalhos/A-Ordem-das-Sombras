@@ -106,13 +106,7 @@ public class PlayerController : MonoBehaviour
         if (player.entity.target == null)
             return;
 
-        Skeleton skeleton = player.entity.target.GetComponent<Skeleton>();
 
-        if (skeleton.entity.isDead)
-        {
-            player.entity.target = null;
-            return;
-        }
 
         float distance = Vector2.Distance(transform.position, player.entity.target.transform.position);
 
@@ -124,9 +118,6 @@ public class PlayerController : MonoBehaviour
 
             if (result < 0)
                 result = 0;
-
-            skeleton.entity.currentHealth -= result;
-            skeleton.entity.target = this.transform;
         }
     }
 

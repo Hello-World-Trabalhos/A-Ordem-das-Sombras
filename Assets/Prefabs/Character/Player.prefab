@@ -214,7 +214,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5542771433806368494}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -278,6 +278,7 @@ MonoBehaviour:
   regenerationFx: {fileID: 4053499381198667470, guid: 9529054443cd0034a962b66fd7626b68, type: 3}
   regenerationSound: {fileID: 8300000, guid: 2847664cc602b1b4baccf974bf9b1f1f, type: 3}
   btnPotion: {fileID: 0}
+  quantPotion: 3
   DetectionEnemy: {fileID: 1318183559331720277}
   timeLoader: 1.5
   spriteEnabledQty: 7

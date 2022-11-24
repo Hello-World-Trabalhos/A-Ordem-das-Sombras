@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Entity entity;
 
     private Slider hpSliper;
-    private Slider xpSliper;
+    //private Slider xpSliper;
 
     [Header("Exp")]
     public int currentExp;
@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     [SerializeField] public GameObject regenerationFx;
     [SerializeField] public AudioClip regenerationSound;
     public Button btnPotion;
+    private Text qtyPotionText;
+    [SerializeField] private int quantPotion = 3;
 
     /*[Header("Detection")]
     [SerializeField] private bool isShowDraw;
@@ -49,17 +51,19 @@ public class Player : MonoBehaviour
             .transform.Find("Hud").gameObject;
         btnPotion = hud.transform.Find("Potion").GetComponent<Button>();
         btnPotion.onClick.AddListener(() => Regeneration());
+        qtyPotionText = hud.transform.Find("PotionText").Find("Text").GetComponent<Text>();
+        qtyPotionText.text = quantPotion.ToString();
 
         hpSliper = hud.transform.Find("HealthBar").transform.Find("HPSlider").GetComponent<Slider>();
-        xpSliper = hud.transform.Find("LevelBar").transform.Find("XPSlider").GetComponent<Slider>();
+        //xpSliper = hud.transform.Find("LevelBar").transform.Find("XPSlider").GetComponent<Slider>();
 
         entity.currentHealth = entity.maxHealth;
         hpSliper.maxValue = entity.maxHealth;
         hpSliper.value = hpSliper.maxValue;
 
         entity.currentXP = 1;
-        xpSliper.maxValue = entity.maxXP;
-        xpSliper.value = 1 ;
+        //xpSliper.maxValue = entity.maxXP;
+        //xpSliper.value = 1 ;
 
         //para o vermelho do dano
         sprite = GetComponent<SpriteRenderer>();
@@ -89,9 +93,7 @@ public class Player : MonoBehaviour
 
 
         hpSliper.value = entity.currentHealth;
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //    entity.currentHealth -= 10;
+        qtyPotionText.text = quantPotion.ToString();
     }
 
     public void GainExp(int amount)
@@ -114,10 +116,15 @@ public class Player : MonoBehaviour
 
     public void Regeneration()
     {
-        entity.currentHealth = entity.maxHealth;
+        if (quantPotion > 0 && (entity.currentHealth != entity.maxHealth))
+        {
+            entity.currentHealth = entity.maxHealth;
 
-        entity.entityAudio.PlayOneShot(regenerationSound);
-        //Instantiate(regenerationFx,this.gameObject.transform);
+            entity.entityAudio.PlayOneShot(regenerationSound);
+            //Instantiate(regenerationFx,this.gameObject.transform);
+
+            quantPotion--;
+        }
     }
 
     public void Die()
@@ -156,13 +163,13 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(damageColorTimer);
         sprite.color = new Color(1f, 1f, 1f, 1f);
 
-        for (int i = 0; i < spriteEnabledQty; i++)
-        {
-            sprite.enabled = false;
-            yield return new WaitForSeconds(damageEnabledTimer);
-            sprite.enabled = true;
-            yield return new WaitForSeconds(damageEnabledTimer);
-        }
+        //for (int i = 0; i < spriteEnabledQty; i++)
+        //{
+        //    sprite.enabled = false;
+        //    yield return new WaitForSeconds(damageEnabledTimer);
+        //    sprite.enabled = true;
+        //    yield return new WaitForSeconds(damageEnabledTimer);
+        //}
     }
     #region Detection
     /*
