@@ -9,7 +9,7 @@ O projeto consiste em um Trabalho de Curso de Ciência da Computação e tem com
 procedurais em jogos. Foi desenvolvido um jogo no gênero Rogue-like os quais geralmente aplicam o conceito de 
 geração aleatória de cenários a cada vez que o jogo inicia.
 
-O jogo está presente na Play Store para download, o link é <... link aqui quando subir...>
+O jogo está presente na Play Store para download, o link é https://play.google.com/store/apps/details?id=com.br.com.helloworldtrabalhos.AOrdemdasSombras
 
 ***
 
