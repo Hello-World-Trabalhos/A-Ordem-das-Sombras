@@ -25,7 +25,7 @@ momento, siga [esse documento](.docs/utilization/Configuration.md) para maiores 
 
 ## Integrantes :sunglasses:
 
-Os integrantes do grupo que desenvolveu esse projeto são:
+Os integrantes do grupo são:
  - [Henrique Neves](https://www.linkedin.com/in/henrique-neves-3213he/)
  - [Lucas Santos](https://www.linkedin.com/in/lucas-silva-santos-dev)
  - [Michael Toninger](https://www.linkedin.com/in/michael-toninger-polidoro-925977193/)
